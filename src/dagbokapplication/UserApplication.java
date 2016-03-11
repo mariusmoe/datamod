@@ -8,8 +8,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Main application for the
- * cabin group
+ * Main application
  *
  */
 public class UserApplication extends Application{

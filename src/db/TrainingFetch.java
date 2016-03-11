@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+
 
 /**
  * Class to fetch data about last dugnad
@@ -18,9 +18,9 @@ public class TrainingFetch {
 
 	private static Connection connect = null;
 	private static Statement statement = null;
-	private ArrayList<Integer> timeList = new ArrayList<Integer>();
+	private ArrayList<Timestamp> timeList = new ArrayList<Timestamp>();
 	private ArrayList<Integer> durationList = new ArrayList<Integer>();
-	private ArrayList<Date> personalFitList = new ArrayList<Date>();
+	private ArrayList<Integer> personalFitList = new ArrayList<Integer>();
 	private ArrayList<Integer> acchivementList = new ArrayList<Integer>();
 
 	private ResultSet resultSet = null;
@@ -64,7 +64,7 @@ public class TrainingFetch {
 		
 		while (resultSet.next()) {
 			
-			timeList.add(resultSet.getTime("tidspunkt"));
+			timeList.add(resultSet.getTimestamp("tidspunkt"));
 			durationList.add(resultSet.getInt("varighet"));
 			personalFitList.add(resultSet.getInt("personlig_form"));
 			acchivementList.add(resultSet.getInt("prestasjon"));
@@ -93,12 +93,34 @@ public class TrainingFetch {
 	    }
 	}
 	
+	
 	/**
-	 * Get hashmap with dugnad values
-	 * @return Dugnad Values
+	 * @return the timeList
 	 */
-	public HashMap<String, Integer> getTrainingValueMap(){
-		return trainingValues;
+	public ArrayList<Timestamp> getTimeList() {
+		return timeList;
+	}
+
+	/**
+	 * @return the durationList
+	 */
+	public ArrayList<Integer> getDurationList() {
+		return durationList;
+	}
+
+
+	/**
+	 * @return the personalFitList
+	 */
+	public ArrayList<Integer> getPersonalFitList() {
+		return personalFitList;
+	}
+
+	/**
+	 * @return the acchivementList
+	 */
+	public ArrayList<Integer> getAcchivementList() {
+		return acchivementList;
 	}
 	
 }
