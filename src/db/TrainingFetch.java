@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -18,7 +19,7 @@ public class TrainingFetch {
 
 	private static Connection connect = null;
 	private static Statement statement = null;
-	private ArrayList<Timestamp> timeList = new ArrayList<Timestamp>();
+	private ArrayList<LocalDate> timeList = new ArrayList<LocalDate>();
 	private ArrayList<Integer> durationList = new ArrayList<Integer>();
 	private ArrayList<Integer> personalFitList = new ArrayList<Integer>();
 	private ArrayList<Integer> acchivementList = new ArrayList<Integer>();
@@ -41,7 +42,7 @@ public class TrainingFetch {
 
 			statement = connect.createStatement();
 	      // Result set get the result of the SQL query
-			resultSet = statement.executeQuery("select * from dag.trening"); //where idtrening = '" + name + "'");
+			resultSet = statement.executeQuery("select * from dag.trening where idtrening = '" + name + "'");
 			System.out.println("Connection SUCCESS - Querry SUCCESS");
 			writeResultSet(resultSet);
 	      
@@ -62,11 +63,12 @@ public class TrainingFetch {
 		
 		while (resultSet.next()) {
 			
-			timeList.add(resultSet.getTimestamp("tidspunkt"));
+			timeList.add(resultSet.getTimestamp("tidspunkt").toLocalDateTime());
 			durationList.add(resultSet.getInt("varighet"));
 			personalFitList.add(resultSet.getInt("personlig_form"));
 			acchivementList.add(resultSet.getInt("prestasjon"));
 	    }
+		
 	  }
 	
 	/**
