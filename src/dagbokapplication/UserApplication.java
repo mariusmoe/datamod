@@ -3,6 +3,7 @@ package dagbokapplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -19,7 +20,7 @@ public class UserApplication extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/UserMainFrame.fxml"));
-        //primaryStage.getIcons().add(new Image("/koieapplication/cabin.png"));
+        primaryStage.getIcons().add(new Image("/dagbokapplication/RunningMan.ico"));
         primaryStage.setTitle("Show training");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinHeight(625);
