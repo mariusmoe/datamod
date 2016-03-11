@@ -1,5 +1,6 @@
 package controllers;
 
+import db.TrainingFetch;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -8,26 +9,39 @@ import javafx.scene.control.TableView;
 public class GetTrainingController {
 
     @FXML
-    private TableColumn<?, ?> performanceColumn;
+    private TableColumn performanceColumn;
 
     @FXML
-    private ChoiceBox<?> trainingBox;
+    private ChoiceBox trainingBox;
 
     @FXML
-    private TableView<?> trainingTable;
+    private TableView trainingTable;
 
     @FXML
-    private TableColumn<?, ?> goalColumn;
+    private TableColumn goalColumn;
 
     @FXML
-    private TableColumn<?, ?> dateColumn;
+    private TableColumn dateColumn;
 
     @FXML
-    private TableColumn<?, ?> durationColumn;
+    private TableColumn durationColumn;
 
     @FXML
-    private TableColumn<?, ?> howColumn;
-
+    private TableColumn howColumn;
+    
+    /**
+	 * Initialize data
+	 */
+	@FXML
+	public void initialize(){
+		System.out.println("controller start!");
+		TrainingFetch tf = new TrainingFetch();
+		try {
+			tf.readDataBase("1");
+		} catch (Exception e) {
+			
+		}
+	}
 
 
 }
