@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.WorkoutsPaneController">
+   <left>
+            <VBox prefHeight="585.0" prefWidth="311.0" BorderPane.alignment="CENTER">
+               <children>
+            <Label text="Øvelser">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+                  <ListView fx:id="exerciseList" prefHeight="590.0" prefWidth="311.0" />
+               </children>
+            </VBox>
+   </left>
+   <center>
+      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+                  <VBox prefHeight="577.0" prefWidth="352.0" spacing="15.0">
+                     <children>
+                        <Label text="Navn">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="exerciseName" editable="false" prefHeight="90.0" prefWidth="275.0" promptText="Beskrivelse.." />
+                        <Label text="Kan erstattes med">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="altExerciseList" prefHeight="99.0" prefWidth="299.0" />
+                     </children>
+                  </VBox>
+         </children>
+      </FlowPane>
+   </center>
+            </BorderPane>

@@ -1,4 +1,4 @@
-package gui;
+package src.gui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

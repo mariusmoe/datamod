@@ -1,178 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+        <?import javafx.geometry.*?>
+        <?import javafx.scene.text.*?>
+        <?import javafx.scene.control.*?>
+        <?import java.lang.*?>
+        <?import javafx.scene.layout.*?>
+        <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="792.0" prefWidth="871.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
-  <tabs>
-    <Tab text="Registrer trening">
-         <content>
-            <BorderPane prefHeight="737.0" prefWidth="1004.0">
-               <left>
-                  <VBox alignment="TOP_CENTER" prefHeight="761.0" prefWidth="291.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
-                     <children>
-                        <Label text="Dato">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <DatePicker prefHeight="31.0" prefWidth="155.0" />
-                        <Label text="Tidspunkt">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" prefHeight="36.0" prefWidth="387.0">
-                           <children>
-                              <ComboBox fx:id="hour" prefHeight="31.0" prefWidth="76.0" />
-                              <Label text=":">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox fx:id="minute" prefHeight="31.0" prefWidth="76.0" />
-                           </children>
-                        </HBox>
-                        <Label text="Varighet">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER" prefHeight="27.0" prefWidth="162.0" spacing="5.0">
-                           <children>
-                              <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="60.0" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
-                           </children>
-                        </HBox>
-                        <Label text="Personlig form">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <Slider blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="45.0" prefWidth="224.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
-                        <Label text="Prestasjon">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <Slider blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
-                        <Label text="Notat">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="262.0" />
-                     </children>
-                     <BorderPane.margin>
-                        <Insets />
-                     </BorderPane.margin>
-                  </VBox>
-               </left>
-               <center>
-                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="758.0" prefWidth="376.0" BorderPane.alignment="TOP_LEFT">
-                     <children>
-                        <VBox fx:id="exContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="683.0" prefWidth="212.0">
-                           <children>
-                              <Label text="Velg øvelser:">
-                                 <font>
-                                    <Font size="19.0" />
-                                 </font>
-                              </Label>
-                              <ComboBox prefWidth="150.0" />
-                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="214.0">
-                                 <children>
-                                    <VBox alignment="CENTER" layoutX="166.0" layoutY="25.0" prefHeight="242.0" prefWidth="223.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Label alignment="CENTER" text="Øvelse">
-                                             <font>
-                                                <Font size="21.0" />
-                                             </font>
-                                          </Label>
-                                          <TextField fx:id="noSets" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="144.0" promptText="Antall sett..." />
-                                          <TextField fx:id="noReps" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="146.0" promptText="Antall repetisjoner..." />
-                                          <HBox alignment="CENTER" prefHeight="35.0" prefWidth="214.0" spacing="5.0">
-                                             <children>
-                                                <TextField fx:id="weight" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="121.0" promptText="Belastning..." />
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="kg" />
-                                             </children>
-                                          </HBox>
-                                          <Button mnemonicParsing="false" onAction="#saveExercise" text="Lagre" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </StackPane>
-               </center>
-               <right><FlowPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
-                     <children>
-                        <fx:include fx:id="exercisePane" source="ExercisePane.fxml" />
-                     </children></FlowPane>
-               </right>
-            </BorderPane>
-         </content>
-    </Tab>
-    <Tab text="Øvelser">
-         <content>
-            <Pane prefHeight="587.0" prefWidth="783.0">
-               <children>
-                  <VBox layoutY="1.0" prefHeight="585.0" prefWidth="311.0">
-                     <children>
-                        <ListView prefHeight="590.0" prefWidth="311.0" />
-                     </children>
-                  </VBox>
-                  <VBox layoutX="311.0" layoutY="7.0" prefHeight="577.0" prefWidth="352.0" spacing="15.0">
-                     <children>
-                        <Label text="Navn">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" prefHeight="200.0" prefWidth="352.0" promptText="Beskrivelse.." />
-                        <Label text="Kan erstattes med">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ListView prefHeight="200.0" prefWidth="200.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-         </content>
-    </Tab>
-      <Tab text="Treningslogg">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="792.0" prefWidth="871.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.gui.MainController">
+<tabs>
+    <Tab fx:id="registerPane" text="Register workout">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <ComboBox layoutX="342.0" layoutY="40.0" prefWidth="150.0" />
-                  <Label layoutX="190.0" layoutY="41.0" text="Hent trening:">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <TableView layoutX="190.0" layoutY="290.0" prefHeight="200.0" prefWidth="365.0">
-                    <columns>
-                      <TableColumn prefWidth="150.0" text="Øvelse" />
-                      <TableColumn minWidth="0.0" prefWidth="97.0" text="Sett" />
-                        <TableColumn prefWidth="117.0" text="Repetisjoner" />
-                    </columns>
-                  </TableView>
-                  <TextField editable="false" layoutX="342.0" layoutY="187.0" />
-                  <Label layoutX="190.0" layoutY="192.0" text="Personlig form :" />
-                  <Label layoutX="190.0" layoutY="234.0" text="Prestasjon:" />
-                  <TextField editable="false" layoutX="342.0" layoutY="229.0" />
-                  <TextArea editable="false" layoutX="190.0" layoutY="528.0" prefHeight="120.0" prefWidth="411.0" />
-                  <Label layoutX="190.0" layoutY="496.0" text="Notat:" />
-               </children>
-            </AnchorPane>
+            <fx:include source="registerPane.fxml" />
         </content>
-      </Tab>
-  </tabs>
+    </Tab>
+    <Tab fx:id="workoutsPane" text="Exercises">
+        <content><fx:include source="workoutsPane.fxml" />
+        </content>
+    </Tab>
+    <Tab fx:id="trainingTab" text="Show workout">
+        <content><fx:include source="UserGetTraining.fxml" /></content>
+    </Tab>
+</tabs>
 </TabPane>
