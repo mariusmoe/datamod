@@ -1,4 +1,4 @@
-package src.gui;
+package gui;
 
 /**
  * Created by Hallgeir on 11.03.2016.
