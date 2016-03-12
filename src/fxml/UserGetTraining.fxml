@@ -21,9 +21,9 @@
       <ChoiceBox fx:id="trainingBox" prefWidth="150.0" GridPane.columnIndex="1" />
       <TableView fx:id="trainingTable" editable="true" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         <columns>
-          <TableColumn fx:id="dateColumn" prefWidth="149.0" text="Training date/time" />
+          <TableColumn fx:id="dateColumn" prefWidth="149.0" text="date" />
           <TableColumn fx:id="durationColumn" minWidth="0.0" prefWidth="82.0" text="Duration" />
-            <TableColumn fx:id="howColumn" prefWidth="85.0" text="How I feel " />
+            <TableColumn fx:id="howColumn" prefWidth="85.0" text="feel" />
             <TableColumn fx:id="goalColumn" minWidth="0.0" prefWidth="150.0" text="Goal" />
             <TableColumn fx:id="performanceColumn" minWidth="0.0" prefWidth="122.0" text="Performance" />
         </columns>

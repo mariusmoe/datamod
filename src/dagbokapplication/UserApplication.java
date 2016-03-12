@@ -16,8 +16,10 @@ public class UserApplication extends Application{
 	/**
 	 * Start application
 	 */
+	public static Stage primaryStage;
 	@Override
 	public void start(Stage primaryStage) throws Exception{
+		this.primaryStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/UserMainFrame.fxml"));
         primaryStage.getIcons().add(new Image("/dagbokapplication/RunningMan.ico"));
         primaryStage.setTitle("Show training");

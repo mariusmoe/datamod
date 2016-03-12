@@ -5,9 +5,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 
 /**
@@ -19,10 +22,12 @@ public class TrainingFetch {
 
 	private static Connection connect = null;
 	private static Statement statement = null;
-	private ArrayList<LocalDate> timeList = new ArrayList<LocalDate>();
+	private ArrayList<LocalDateTime> timeList = new ArrayList<LocalDateTime>();
 	private ArrayList<Integer> durationList = new ArrayList<Integer>();
 	private ArrayList<Integer> personalFitList = new ArrayList<Integer>();
 	private ArrayList<Integer> acchivementList = new ArrayList<Integer>();
+	
+	private HashMap<LocalDateTime, ArrayList> trainingMap = new HashMap<>();
 
 	private ResultSet resultSet = null;
 	
@@ -42,7 +47,7 @@ public class TrainingFetch {
 
 			statement = connect.createStatement();
 	      // Result set get the result of the SQL query
-			resultSet = statement.executeQuery("select * from dag.trening where idtrening = '" + name + "'");
+			resultSet = statement.executeQuery("select * from dag.trening inner join dag.maal on trening.maal_maal_id=maal.maal_id ");// where idtrening = '" + name + "'");
 			System.out.println("Connection SUCCESS - Querry SUCCESS");
 			writeResultSet(resultSet);
 	      
@@ -62,12 +67,28 @@ public class TrainingFetch {
 	private void writeResultSet(ResultSet resultSet) throws SQLException {
 		
 		while (resultSet.next()) {
-			
+			/*
 			timeList.add(resultSet.getTimestamp("tidspunkt").toLocalDateTime());
 			durationList.add(resultSet.getInt("varighet"));
 			personalFitList.add(resultSet.getInt("personlig_form"));
 			acchivementList.add(resultSet.getInt("prestasjon"));
+			*/
+			ArrayList<Object> arr = new ArrayList<Object>();
+			
+			arr.add(resultSet.getInt("varighet"));
+			arr.add(resultSet.getInt("personlig_form"));
+			arr.add(resultSet.getInt("prestasjon"));
+			arr.add(resultSet.getString("maal"));
+			arr.add(resultSet.getInt("idtrening"));
+			//add more columns from result-set here ->
+			
+			System.out.println(arr);
+			
+			trainingMap.put(resultSet.getTimestamp("tidspunkt").toLocalDateTime(), arr);
+			//arr.clear();
 	    }
+		
+		System.out.println(trainingMap);
 		
 	  }
 	
@@ -95,7 +116,7 @@ public class TrainingFetch {
 	/**
 	 * @return the timeList
 	 */
-	public ArrayList<Timestamp> getTimeList() {
+	public ArrayList<LocalDateTime> getTimeList() {
 		return timeList;
 	}
 
@@ -118,6 +139,13 @@ public class TrainingFetch {
 	 */
 	public ArrayList<Integer> getAcchivementList() {
 		return acchivementList;
+	}
+	
+	/**
+	 * @return the acchivementList
+	 */
+	public HashMap<LocalDateTime, ArrayList> getTrainingMap() {
+		return trainingMap;
 	}
 	
 }
