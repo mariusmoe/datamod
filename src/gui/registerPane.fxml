@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="737.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
+   <center>
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="758.0" prefWidth="376.0" BorderPane.alignment="TOP_LEFT">
+         <children>
+            <VBox fx:id="exContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="683.0" prefWidth="212.0">
+               <children>
+                  <Label text="Velg øvelser:">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <ComboBox prefWidth="150.0" />
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="214.0">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="166.0" layoutY="25.0" prefHeight="242.0" prefWidth="223.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label alignment="CENTER" text="Øvelse">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="noSets" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="144.0" promptText="Antall sett..." />
+                              <TextField fx:id="noReps" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="146.0" promptText="Antall repetisjoner..." />
+                              <HBox alignment="CENTER" prefHeight="35.0" prefWidth="214.0" spacing="5.0">
+                                 <children>
+                                    <TextField fx:id="weight" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="121.0" promptText="Belastning..." />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" text="kg" />
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#saveExercise" text="Lagre" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="761.0" prefWidth="291.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <Label text="Dato">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <DatePicker prefHeight="31.0" prefWidth="155.0" />
+            <Label text="Tidspunkt">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="387.0">
+               <children>
+                  <ComboBox fx:id="hour" prefHeight="31.0" prefWidth="76.0" />
+                  <Label text=":">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="minute" prefHeight="31.0" prefWidth="76.0" />
+               </children>
+            </HBox>
+            <Label text="Varighet">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="27.0" prefWidth="162.0" spacing="5.0">
+               <children>
+                  <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="60.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
+               </children>
+            </HBox>
+            <Label text="Personlig form">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Slider blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="45.0" prefWidth="224.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Label text="Prestasjon">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Slider blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Label text="Notat">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="262.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <right>
+      <FlowPane alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <fx:include fx:id="exercisePane" source="ExercisePane.fxml" />
+         </children>
+      </FlowPane>
+   </right>
+</BorderPane>
