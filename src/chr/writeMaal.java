@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Scanner;
-
+/**
+ * This method writes to maal.
+ * @author Eier
+ *
+ */
 public class writeMaal {
 	
 	private static boolean exists(int maal_id){

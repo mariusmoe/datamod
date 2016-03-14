@@ -5,7 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-
+/**
+ * This class gets all information about maal
+ * @author Christian
+ *
+ */
 public class getMaal {
 	private static int amountOfRows;
 	private Statement myStmt;

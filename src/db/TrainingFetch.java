@@ -42,7 +42,7 @@ public class TrainingFetch {
 			//mysql.stud.ntnu.no
 			// connect = DriverManager.getConnection("jdbc:mysql://localhost/dag?" + "user=mariuom_koie&password=eple");
 			// connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag" , "root", null);
-			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag","root","eple");
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag","root1","eple");
 	     // Connection connection = DriverManager.getConnection("jdbc:mysql://129.241.160.113/mariuom_koiedb?" + "user=mariuom_koie&password=eple");
 
 			statement = connect.createStatement();
