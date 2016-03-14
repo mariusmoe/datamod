@@ -23,7 +23,7 @@ public class writeMaal {
 			
 			Statement myStmt = myCon.createStatement();
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("Enter maal_id");
+			System.out.println("Enter maal_id: ");
 			int maal_id = scanner.nextInt();
 			//String sql = "insert into maal"
 			//		+ " (maal_id, fra_data, oppnaadd_dato, maal, til_dato)"

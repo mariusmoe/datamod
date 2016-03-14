@@ -7,10 +7,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 public class getMaal {
-	static int amountOfColumns;
-	Statement myStmt;
-	ResultSet myRs;
-	ResultSetMetaData metadata;
+	private static int amountOfColumns;
+	private Statement myStmt;
+	private ResultSet myRs;
+	private ResultSetMetaData metadata;
 	
 	public getMaal(){
 		try{
@@ -28,7 +28,7 @@ public class getMaal {
 		}
 	}
 	
-	int getColumnCount(){
+	public int getColumnCount(){
 		System.out.println("Amount of columns: " + amountOfColumns);
 		return amountOfColumns;
 	}
@@ -61,10 +61,11 @@ public class getMaal {
 			
 			while (myRs.next()){
 				String row = "";
-				for (int i = 1; i <= columnCount; i++){
+				for (int i = 1; i <= amountOfColumns; i++){
 					row += myRs.getString(i) + ", ";
 				}
 				System.out.println(row);
+				System.out.println(amountOfColumns);
 			}
 		}
 		catch(Exception exc){
