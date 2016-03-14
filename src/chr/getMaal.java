@@ -7,7 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 public class getMaal {
-	private static int amountOfColumns;
+	private static int amountOfRows;
 	private Statement myStmt;
 	private ResultSet myRs;
 	private ResultSetMetaData metadata;
@@ -17,11 +17,14 @@ public class getMaal {
 			Connection myCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root1", "eple");
 			Statement myStmt = myCon.createStatement();
 			ResultSet myRs = myStmt.executeQuery("select * from maal");
+			ResultSet ids = myStmt.executeQuery("select maal_id from maal");
+			
 			ResultSetMetaData metadata = myRs.getMetaData();
+			ResultSetMetaData collectRows = ids.getMetaData();
 			
-			int columnCount = metadata.getColumnCount();
+			int rowCount = collectRows.getColumnCount();
 			
-			amountOfColumns = columnCount;
+			amountOfRows = rowCount;
 		}
 		catch(Exception exc){
 			exc.printStackTrace();
@@ -29,15 +32,15 @@ public class getMaal {
 	}
 	
 	public int getColumnCount(){
-		System.out.println("Amount of columns: " + amountOfColumns);
-		return amountOfColumns;
+		System.out.println("Amount of columns: " + amountOfRows);
+		return amountOfRows;
 	}
 	
 	public void retrieveMaal(){
 		try{
 		while (myRs.next()){
 			String row = "";
-			for (int i = 1; i <= amountOfColumns; i++){
+			for (int i = 1; i <= amountOfRows; i++){
 				row += myRs.getString(i) + ", ";
 			}
 			System.out.println(row);
@@ -57,15 +60,15 @@ public class getMaal {
 			
 			int columnCount = metadata.getColumnCount();
 			
-			amountOfColumns = columnCount;
+			amountOfRows = columnCount;
 			
 			while (myRs.next()){
 				String row = "";
-				for (int i = 1; i <= amountOfColumns; i++){
+				for (int i = 1; i <= amountOfRows; i++){
 					row += myRs.getString(i) + ", ";
 				}
 				System.out.println(row);
-				System.out.println(amountOfColumns);
+				System.out.println(amountOfRows);
 			}
 		}
 		catch(Exception exc){
