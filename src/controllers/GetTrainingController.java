@@ -1,6 +1,5 @@
 package controllers;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,6 +58,7 @@ public class GetTrainingController {
     /**
 	 * Initialize data
 	 */
+	@SuppressWarnings("unchecked")
 	@FXML
 	public void initialize(){
 		System.out.println("controller start!");
@@ -120,7 +120,6 @@ public class GetTrainingController {
 		howColumn.setCellFactory(stringCellFactory);
 		
 		performanceColumn.setCellValueFactory(new PropertyValueFactory<TrainingRow, Integer>("performance"));
-		//performanceColumn.setCellFactory(integerCellFactory);
 		performanceColumn.setCellFactory(stringCellFactory);
 		
 		goalColumn.setCellValueFactory(new PropertyValueFactory<TrainingRow, Integer>("maal"));
@@ -143,7 +142,7 @@ public class GetTrainingController {
         dialog.initOwner(UserApplication.primaryStage);
         VBox dialogVbox = new VBox(20);
         dialogVbox.getChildren().add(new Text("This is a Dialog: "+ s));
-        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        Scene dialogScene = new Scene(dialogVbox, 400, 300);
         dialog.setScene(dialogScene);
         dialog.show();
             

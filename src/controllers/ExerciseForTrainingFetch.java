@@ -47,7 +47,9 @@ public class ExerciseForTrainingFetch {
 
 			statement = connect.createStatement();
 	      // Result set get the result of the SQL query
-			resultSet = statement.executeQuery("select * from dag.trening inner join dag.maal on trening.maal_maal_id=maal.maal_id ");// where idtrening = '" + name + "'");
+			resultSet = statement.executeQuery("select * from dag.trening "+
+					"inner join dag.ovelse_has_trening on trening.idtrening=ovelse_has_trening.trening_idtrening " +
+					"inner join dag.ovelse on ovelse_has_trening.ovelse_navn=ovelse.navn");// where idtrening = '" + name + "'");
 			System.out.println("Connection SUCCESS - Querry SUCCESS");
 			writeResultSet(resultSet);
 	      
@@ -111,3 +113,4 @@ public class ExerciseForTrainingFetch {
 	    } catch (Exception e) {
 	    }
 	}
+}

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class UserApplication extends Application{
 	
 	/**
-	 * Start application
+	 * Start application!
 	 */
 	public static Stage primaryStage;
 	@Override

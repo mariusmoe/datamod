@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * Class to fetch data about last dugnad
+ * Class to fetch data about a training
  * @author Marius Oscar Moe
  *
  */
