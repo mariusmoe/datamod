@@ -9,7 +9,7 @@
 
 <BorderPane prefHeight="737.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
    <center>
-      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="737.0" prefWidth="425.0" BorderPane.alignment="TOP_LEFT">
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="737.0" prefWidth="425.0" BorderPane.alignment="TOP_CENTER">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="745.0" prefWidth="433.0" spacing="20.0">
                <children>

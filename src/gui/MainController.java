@@ -6,9 +6,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MainController {
+
+
+
 
 	@FXML private Label airqText;
 	@FXML private Slider airqSlider;
@@ -31,6 +35,7 @@ public class MainController {
 
     @FXML private TextField noReps;
 
+	private Collection<Exercise> exercises;
 	
 	@FXML
     void saveExercise() {
@@ -104,6 +109,7 @@ public class MainController {
 			}
 		});
 		fillComboBox();
+		loadExercises();
 
 		/*ReadOnlyObjectProperty<Exercise> selectionProperty = exercises.getSelectionModel().selectedItemProperty();
 		selectionProperty.addListener((property, oldValue, newValue) -> {
@@ -127,6 +133,10 @@ public class MainController {
 		minute.getItems().addAll(minutes);
 		minute.setValue(minutes.get(0));
 		
+	}
+
+	public void loadExercises(){
+
 	}
 	
 }
