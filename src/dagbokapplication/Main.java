@@ -1,4 +1,4 @@
-package gui;
+package dagbokapplication;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +14,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 
-			Parent root = FXMLLoader.load((Main.class.getResource("RootLayout.fxml")));
+			Parent root = FXMLLoader.load((Main.class.getResource("../gui/RootLayout.fxml")));
 			Scene scene = new Scene(root);
-			primaryStage.getIcons().add(new Image("/dagbokapplication/RunningMan.ico"));
+			primaryStage.getIcons().add(new Image("RunningMan.ico"));
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Registrer trening");
 			primaryStage.setMinHeight(900);

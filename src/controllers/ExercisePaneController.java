@@ -20,8 +20,12 @@ public class ExercisePaneController {
     @FXML
     private TextField noReps;
 
+
     private final ObservableList<SavedExercise> exercises = FXCollections.observableArrayList();
-    
+
+    public ObservableList<SavedExercise> getExercises() {
+        return exercises;
+    }
     @FXML
     void saveExercise() {
     	if (isValidInput()){
