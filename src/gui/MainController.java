@@ -1,4 +1,5 @@
 package gui;
+import db.ExerciseFetch;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -34,6 +35,7 @@ public class MainController {
     @FXML private TextField noSets;
 
     @FXML private TextField noReps;
+	@FXML private ComboBox<String> exerciseComboBox;
 
 	private Collection<Exercise> exercises;
 	
@@ -110,12 +112,19 @@ public class MainController {
 		});
 		fillComboBox();
 		loadExercises();
+		for (Exercise ex : exercises){
+
+			exerciseComboBox.getItems().add(ex.getName());
+		}
+
 
 		/*ReadOnlyObjectProperty<Exercise> selectionProperty = exercises.getSelectionModel().selectedItemProperty();
 		selectionProperty.addListener((property, oldValue, newValue) -> {
 			expController.exercisePicked(newValue);
 		}
 		);*/
+
+
 	}
 
 
@@ -136,6 +145,9 @@ public class MainController {
 	}
 
 	public void loadExercises(){
+		ExerciseFetch ef = new ExerciseFetch();
+		ef.readExercises("1");
+		exercises = ef.getExercises();
 
 	}
 	

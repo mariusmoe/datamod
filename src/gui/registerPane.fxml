@@ -49,7 +49,7 @@
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="exerciseComboBox" prefWidth="150.0" />
                         <Label alignment="CENTER" text="Øvelse">
                            <font>
                               <Font size="17.0" />
