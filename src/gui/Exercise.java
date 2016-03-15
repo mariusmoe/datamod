@@ -1,58 +1,49 @@
 package gui;
 
 import javafx.beans.property.Property;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Exercise {
+
+	public Exercise(String name, String description, String alternative, String category){
+		setName(name);
+		setDescription(description);
+		setAlternative(alternative);
+		setCategory(category);
+	}
+
+
 	private Property<String> nameProperty = new SimpleStringProperty();
-	private Property<Number> setProperty = new SimpleIntegerProperty();
-	private Property<Number> repProperty = new SimpleIntegerProperty();
-	private Property<Number> weightProperty = new SimpleIntegerProperty();
-	
+	private Property<String> descriptionProperty = new SimpleStringProperty();
+	private Property<String> alternativeProperty = new SimpleStringProperty();
+	private Property<String> categoryProperty = new SimpleStringProperty();
+
+
+	void setDescription(String descr){
+		descriptionProperty.setValue(descr);
+	}
+	String getDescription(){
+		return descriptionProperty.getValue();
+	}
 	void setName(String name){
 		nameProperty.setValue(name);
 	}
-	
 	String getName(){
 		return nameProperty.getValue();
 	}
-	
-	void setSet(int set){
-		setProperty.setValue(set);
+	void setAlternative(String alternative){
+		alternativeProperty.setValue(alternative);
 	}
-	
-	int getSet(){
-		return setProperty.getValue().intValue();
+	String getAlternative(){
+		return alternativeProperty.getValue();
 	}
-	
-	void setRep(int rep){
-		repProperty.setValue(rep);
+	void setCategory(String category) {
+		categoryProperty.setValue(category);
 	}
-	int getRep(){
-		return repProperty.getValue().intValue();
-	}
-	
-	void setWeight(int set){
-		weightProperty.setValue(set);
-	}
-	int getWeight(){
-		return weightProperty.getValue().intValue();
-	}
-	
-	public Property<Number> getSetProperty(){
-		return setProperty;
-	}
-
-	public Property<Number> getRepProperty() {
-		return repProperty;
+	String getCategory(){
+		return categoryProperty.getValue();
 	}
 
 
-	public Property<Number> getWeightProperty() {
-		return weightProperty;
-	}
-
-	
 
 }
