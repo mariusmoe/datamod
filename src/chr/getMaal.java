@@ -51,14 +51,11 @@ public class getMaal {
 	public List<Integer> retrieveIDs(){
 		List<Integer> list = new ArrayList<>();
 		try {
-			ResultSet getIds = stmt.executeQuery("select distinct maal_id from maal");
-			String row = "";
-			int i=0;
-			while (getIds.next()){
-				i += 1;
-				row = getIds.getString(i);
-				list.add(Integer.parseInt(row));
-				System.out.println("Rownr: " + row);
+			ResultSet queryResult = stmt.executeQuery("select maal_id from maal");
+			while (queryResult.next()){
+				int maal_id = queryResult.getInt("maal_id");
+				list.add(maal_id);
+				System.out.println("Rownr: " + maal_id);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
