@@ -1,4 +1,5 @@
-package gui;
+package controllers;
+import Model.Exercise;
 import db.ExerciseFetch;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -38,6 +39,8 @@ public class MainController {
 	@FXML private ComboBox<String> exerciseComboBox;
 
 	private Collection<Exercise> exercises;
+
+	@FXML private Label exerciseNameLbl;
 	
 	@FXML
     void saveExercise() {
@@ -116,6 +119,13 @@ public class MainController {
 
 			exerciseComboBox.getItems().add(ex.getName());
 		}
+		exerciseComboBox.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				exerciseNameLbl.setText(newValue);
+
+			}
+		});
 
 
 		/*ReadOnlyObjectProperty<Exercise> selectionProperty = exercises.getSelectionModel().selectedItemProperty();

@@ -1,12 +1,15 @@
-package gui;
+package controllers;
 
+import Model.SavedExercise;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class ExercisePaneController {
 	
-	@FXML private ListView<String> exercises;
+	@FXML private TableView exerciseNameLbl;
 
     @FXML
     private TextField weight;
@@ -16,12 +19,18 @@ public class ExercisePaneController {
 
     @FXML
     private TextField noReps;
+
+    private final ObservableList<SavedExercise> exercises = FXCollections.observableArrayList();
     
     @FXML
     void saveExercise() {
     	if (isValidInput()){
     		
     	}
+
+    }
+
+    public void initialize(){
 
     }
 

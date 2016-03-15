@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="737.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
+<BorderPane prefHeight="737.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <center>
       <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="737.0" prefWidth="425.0" BorderPane.alignment="TOP_CENTER">
          <children>
@@ -50,7 +50,7 @@
                            </font>
                         </Label>
                         <ComboBox fx:id="exerciseComboBox" prefWidth="150.0" />
-                        <Label alignment="CENTER" text="Øvelse">
+                        <Label fx:id="exerciseNameLbl" alignment="CENTER" text="Øvelse">
                            <font>
                               <Font size="17.0" />
                            </font>

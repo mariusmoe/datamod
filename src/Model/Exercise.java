@@ -1,9 +1,13 @@
-package gui;
+package Model;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Exercise {
+
+	public Exercise(){
+
+	}
 
 	public Exercise(String name, String description, String alternative, String category){
 		setName(name);
@@ -22,25 +26,25 @@ public class Exercise {
 	void setDescription(String descr){
 		descriptionProperty.setValue(descr);
 	}
-	String getDescription(){
+	public String getDescription(){
 		return descriptionProperty.getValue();
 	}
 	void setName(String name){
 		nameProperty.setValue(name);
 	}
-	String getName(){
+	public String getName(){
 		return nameProperty.getValue();
 	}
 	void setAlternative(String alternative){
 		alternativeProperty.setValue(alternative);
 	}
-	String getAlternative(){
+	public String getAlternative(){
 		return alternativeProperty.getValue();
 	}
 	void setCategory(String category) {
 		categoryProperty.setValue(category);
 	}
-	String getCategory(){
+	public String getCategory(){
 		return categoryProperty.getValue();
 	}
 
