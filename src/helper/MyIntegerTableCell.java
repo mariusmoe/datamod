@@ -2,7 +2,10 @@ package helper;
 
 import javafx.scene.control.TableCell;
 
-
+/**
+ * Help create a callback when a cell has been clicked
+ * @author Marius Oscar Moe
+ */
 public class MyIntegerTableCell extends TableCell<TrainingRow, Integer> {
 	 
     @Override

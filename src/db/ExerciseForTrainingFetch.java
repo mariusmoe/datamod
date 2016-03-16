@@ -42,10 +42,7 @@ public class ExerciseForTrainingFetch {
 		System.out.println("trid to connect...");
 		try {
 			//mysql.stud.ntnu.no
-			// connect = DriverManager.getConnection("jdbc:mysql://localhost/dag?" + "user=mariuom_koie&password=eple");
-			// connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag" , "root", null);
 			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag","root","eple");
-	     // Connection connection = DriverManager.getConnection("jdbc:mysql://129.241.160.113/mariuom_koiedb?" + "user=mariuom_koie&password=eple");
 
 			statement = connect.createStatement();
 	      // Result set get the result of the SQL query
@@ -54,7 +51,6 @@ public class ExerciseForTrainingFetch {
 					"inner join dag.ovelse on ovelse_has_trening.ovelse_navn=ovelse.navn " + 
 					"where idtrening = " + Integer.parseInt(idtrening));
 			
-			System.out.println("Connection SUCCESS - Querry SUCCESS");
 			writeResultSet(resultSet);
 	      
 	    } catch (Exception e) {
@@ -103,31 +99,11 @@ public class ExerciseForTrainingFetch {
 	    }
 	}
 	
-	
-	public ArrayList<String> getOvelseNavn() {
-		return ovelseNavn;
-	}
 
-	public ArrayList<Integer> getBelastning() {
-		return belastning;
-	}
-
-	public ArrayList<Integer> getSett() {
-		return sett;
-	}
-
-	public ArrayList<Integer> getRepetisjoner() {
-		return repetisjoner;
-	}
-
-	public ArrayList<String> getBeskrivelse() {
-		return beskrivelse;
-	}
-
-	public ArrayList<String> getKategori() {
-		return kategori;
-	}
-	
+	/**
+	 * 
+	 * @return exForTraining array with arrays with info about exercises in the training requested 
+	 */
 	public ArrayList<ArrayList> getExForTraining() {
 		exForTraining.add(ovelseNavn);
 		exForTraining.add(belastning);

@@ -45,6 +45,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+/**
+ * Controller for the get-training-view
+ * 
+ * @author Marius Oscar Moe
+ *
+ */
 public class GetTrainingController {
 
     @FXML
@@ -76,16 +82,15 @@ public class GetTrainingController {
 	 */
 	@SuppressWarnings("unchecked")
 	@FXML
-	public void initialize(){
-		System.out.println("controller start!");
-		
+	public void initialize(){		
 		try {
+			//Read the db for training(@param does not mean anything)
 			tf.readDataBase("4");
 		} catch (Exception e) {
 			
 		}
 		
-
+		//Makes it possible to detect what was clicked 
 		Callback<TableColumn, TableCell> integerCellFactory =
                 new Callback<TableColumn, TableCell>() {
             @Override
@@ -95,7 +100,8 @@ public class GetTrainingController {
                 return cell;
             }
         };
- 
+        
+        //Makes it possible to detect what was clicked 
         Callback<TableColumn, TableCell> stringCellFactory =
                 new Callback<TableColumn, TableCell>() {
             @Override
@@ -109,18 +115,16 @@ public class GetTrainingController {
         
 		
 		
-		
+		//puts every element in the hashmap in a traning row
 		trainingTable.setEditable(false);
-		System.out.println("got this far ---------->");
 		HashMap<LocalDateTime, ArrayList> data = tf.getTrainingMap();
         Collection<TrainingRow> dataset = data.entrySet()
         		.stream()
         		.map(entry -> {
         			return new TrainingRow(entry.getKey(), entry.getValue());
         		}).collect(Collectors.toList());
-        System.out.println("here____");
-		dataset.forEach(System.out::println);
-		System.out.println(tf.toString());
+		//dataset.forEach(System.out::println);
+		
 		
 		//Put collection in a list so index makes sense(used when row clicked)
 		if (dataset instanceof List)
@@ -128,6 +132,7 @@ public class GetTrainingController {
 		else
 		  list = new ArrayList(dataset);
 		
+		//populates the columns 
 		dateColumn.setCellValueFactory(new PropertyValueFactory<TrainingRow, String>("time"));
 		dateColumn.setCellFactory(stringCellFactory);
 		
@@ -142,47 +147,32 @@ public class GetTrainingController {
 		
 		goalColumn.setCellValueFactory(new PropertyValueFactory<TrainingRow, Integer>("maal"));
 		goalColumn.setCellFactory(stringCellFactory);
-	
 		
 		ObservableList<TrainingRow> observablelist = FXCollections.observableArrayList(dataset);
 		
 		trainingTable.setItems(observablelist);	
 		
-
 		trainingTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-		    
-			System.out.println("AAAAAAAAAAAA: "+newSelection.getId());
-			
+			//If enter is pressed and a row is marked this will trigger a pop-up
 			trainingTable.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			    @Override
 			    public void handle(KeyEvent keyEvent) {
 			        if (keyEvent.getCode() == KeyCode.ENTER)  {
-			            System.out.println("ppppppppppp");
 			            popup(newSelection.getTrueTime(), newSelection.getId());
 			        }
 			    }
 			});
 			 
 		});
-		
-		
-		         
-
-		
-
-		
-//        Callback<TableColumn, TableCell> stringEnterCellFactory =
-//                new Callback<TableColumn, TableCell>() {
-//            @Override
-//            public TableCell call(TableColumn p) {
-//            	MyEnterStringTableRow cell = new MyEnterStringTableRow();
-//                cell.addEventFilter(KeyCode.ENTER, new MyEnterEventHandler());
-//                return cell;
-//            }
-        //};
 	}
 	
-	
+	/**
+	 * This method creates a pop-up-window with all the exercises in the 
+	 * training clicked 
+	 * 
+	 * @param s		string with time/date
+	 * @param id	of training
+	 */
 	public void popup(String s, String id){
 		
 		// call to a db function -> what kind if exercises was carried out during this training?
@@ -190,7 +180,6 @@ public class GetTrainingController {
 		try {
 			eftf.readDataBase(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ArrayList<ArrayList> allOvelser = eftf.getExForTraining();
@@ -201,8 +190,6 @@ public class GetTrainingController {
 					" Sett: " + allOvelser.get(2).get(i) + " Repetisjoner: " + allOvelser.get(3).get(i) + " Beskrivelse: " + allOvelser.get(4).get(i) + 
 					" Kategori: " + allOvelser.get(5).get(i) + "\n" + "-----------------\n");
 		}
-		System.out.println(bStr);
-		
 		
 		Group root = new Group();
 		Scene dialogScene = new Scene(root, 400, 300);
@@ -214,10 +201,7 @@ public class GetTrainingController {
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(UserApplication.primaryStage);
-        //VBox dialogVbox = new VBox(20);
-        //dialogVbox.getChildren().add(new Text("This is a Dialog: "+ s));
-        //VBox dialogVbox2 = new VBox(40);
-        //dialogVbox2.getChildren().add(new Text(bStr.toString()));
+
         Button cancel = new Button("Cancel");
         cancel.setCancelButton(true);
         cancel.setOnAction((actionEvent) -> dialog.close());
@@ -230,15 +214,11 @@ public class GetTrainingController {
         ScrollPane s1 = new ScrollPane();
         s1.setPrefSize(380, 300);
         s1.setHbarPolicy(ScrollBarPolicy.NEVER);
-        Pane p1 = new Pane();
-        //p1.setMaxSize(380, 300);
-        //p1.addAll(s1);
         s1.setContent(label3);
-        gridpane.add(cancel, 0, 3); // column=2 row=1
-        gridpane.add(s1, 0, 1);  // column=3 row=1
+        gridpane.add(cancel, 0, 3); // column=0 row=3
+        gridpane.add(s1, 0, 1);  // column=0 row=1
         gridpane.setMaxSize(400, 300);
         root.getChildren().addAll(gridpane);
-        
         
         dialog.setScene(dialogScene);
         dialog.show();            

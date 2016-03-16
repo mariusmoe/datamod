@@ -5,8 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import controllers.GetTrainingController;
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * This class represent a row of information in the table-view {@link GetTrainingController}.
+ * @author moe
+ *
+ */
 public final class TrainingRow {
 	 
     private final SimpleStringProperty time;
