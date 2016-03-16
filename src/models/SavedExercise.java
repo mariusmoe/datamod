@@ -51,6 +51,10 @@ public class SavedExercise {
 
     }
 
+    public String getName(){
+        return exName.getValue();
+    }
+
 
 
 

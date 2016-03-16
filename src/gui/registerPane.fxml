@@ -16,7 +16,7 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <DatePicker prefHeight="31.0" prefWidth="155.0" />
+            <DatePicker fx:id="date" prefHeight="31.0" prefWidth="155.0" promptText="Velg en dato" />
             <Label text="Tidspunkt">
                <font>
                   <Font size="19.0" />
@@ -158,6 +158,11 @@
       </FlowPane>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="163.0" text="Lagre trening" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="savedText" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Button mnemonicParsing="false" onAction="#saveWorkout" prefHeight="42.0" prefWidth="163.0" text="Lagre trening" />
+         </children>
+      </VBox>
    </bottom>
 </BorderPane>

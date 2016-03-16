@@ -1,5 +1,7 @@
 package controllers;
+
 import db.ExerciseFetch;
+import db.TrainingInsert;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -7,9 +9,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import models.Exercise;
 import models.SavedExercise;
+import models.Workout;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +22,7 @@ import java.util.List;
 public class MainController {
 
 
+	@FXML private DatePicker date;
 	@FXML private ComboBox<String> hour;
 	@FXML private ComboBox<String> minute;
 
@@ -74,6 +80,8 @@ public class MainController {
 	@FXML private TableColumn<SavedExercise, Integer> weightCol;
 	@FXML private TableColumn<SavedExercise, Integer> lengthCol;
 
+	@FXML private Text savedText;
+
 	/*Observable list of saved exercises that are to be displayed in tableview*/
 	private final ObservableList<SavedExercise> exerciseData = FXCollections.observableArrayList();
 
@@ -88,6 +96,7 @@ public class MainController {
 
 
 	@FXML private void initialize(){
+
 
 		conditionToggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
@@ -172,6 +181,10 @@ public class MainController {
 		lengthCol.setCellValueFactory(cellData -> cellData.getValue().exLengthProperty().asObject());
 		/*Tells tableview to get items from the observable list exerciseData*/
 		savedExerciseTable.setItems(exerciseData);
+
+		/*Ensures that at least one of each "toggle duo" is selected*/
+		indoorToggle.setSelected(true);
+		strengthToggle.setSelected(true);
 	}
 
 	private void strengthToggled() {
@@ -244,7 +257,7 @@ public class MainController {
 		}
 	}
 
-	/*Fill the hour and minute comboboxes with values*/
+	/*Fill the hour and minute combo boxes with values*/
 	private void fillComboBox() {
 		List<String> hours = new ArrayList<>(17);
 		List<String> minutes = new ArrayList<>(13);
@@ -268,5 +281,49 @@ public class MainController {
 		exercises = ef.getExercises();
 
 	}
-	
+
+	/*Runs when "Lagre trening" is pressed.*/
+	@FXML void saveWorkout() {
+		List<String> exList = new ArrayList<String>(exerciseData.size());
+		for (SavedExercise svdEx : exerciseData){
+			exList.add(svdEx.getName());
+		}
+		if(validInput()){
+			LocalTime time = LocalTime.of(Integer.parseInt(hour.getValue()), Integer.parseInt(minute.getValue()));
+			int feelSliderValue = (int) feelingSlider.getValue();
+			int achievementSliderValue = (int) achievementSlider.getValue();
+			int durationInt = Integer.parseInt(duration.getText());
+			Workout work = new Workout(date.getValue(), time, durationInt, feelSliderValue, achievementSliderValue, note.getText());
+			if (indoorToggle.selectedProperty().getValue()){
+				int specsNumInt;
+				if (specsNum.getText()==null) {
+					specsNumInt = 0;
+				}
+				else{
+					specsNumInt = Integer.parseInt(specsNum.getText());
+				}
+				work.setIndoorFields(specsNumInt, (int)airqSlider.getValue());
+			}
+			else{
+				work.setOutdoorFields(Integer.parseInt(tempField.getText()), weatherArea.getText());
+			}
+			TrainingInsert trainIns = new TrainingInsert(work, indoorToggle.selectedProperty().getValue());
+			trainIns.upload();
+		}
+
+	}
+	/*Checks if the essential fields have values. The outcome results in appropriate feedback to the user*/
+	private boolean validInput() {
+		if (date.getValue()==null || duration.getText()==null || exerciseData.isEmpty()){
+			savedText.setText("Treningen ble ikke lagret; sjekk at alle felt er gyldige og at minst én trening er lagt til");
+			savedText.setFill(Paint.valueOf("red"));
+			return false;
+		}
+		savedText.setText("Treningen ble lagret");
+		savedText.setFill(Paint.valueOf("green"));
+		return true;
+
+	}
+
+
 }
