@@ -7,72 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="737.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
-   <center>
-      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="737.0" prefWidth="425.0" BorderPane.alignment="TOP_CENTER">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="745.0" prefWidth="433.0" spacing="20.0">
-               <children>
-                  <Label text="Type trening">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="208.0" spacing="110.0">
-                     <children>
-                        <ToggleButton fx:id="indoorToggle" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="Innendørs" />
-                        <ToggleButton fx:id="outdoorToggle" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Utendørs" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="406.0" spacing="15.0">
-                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="162.0" spacing="20.0">
-                           <children>
-                              <Label fx:id="airqText" text="Luftkvalitet" textFill="#bfb9b9" />
-                              <Slider fx:id="airqSlider" blockIncrement="1.0" disable="true" majorTickUnit="1.0" max="5.0" maxWidth="-Infinity" min="1.0" minorTickCount="0" prefHeight="45.0" prefWidth="139.0" showTickLabels="true" showTickMarks="true" value="3.0" />
-                              <TextField fx:id="specsNum" disable="true" maxWidth="-Infinity" prefHeight="31.0" prefWidth="141.0" promptText="Antall tilskuere" />
-                           </children>
-                        </VBox>
-                        <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <VBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="170.0" spacing="10.0">
-                           <children>
-                              <TextField fx:id="tempField" alignment="TOP_LEFT" disable="true" maxWidth="-Infinity" prefHeight="31.0" prefWidth="176.0" promptText="Temperatur" />
-                              <TextArea fx:id="weatherArea" disable="true" prefHeight="69.0" prefWidth="165.0" promptText="Værforhold" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <VBox alignment="CENTER" prefHeight="591.0" prefWidth="262.0" spacing="15.0">
-                     <children>
-                        <Label text="Velg øvelser:">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="exerciseComboBox" prefWidth="150.0" />
-                        <Label fx:id="exerciseNameLbl" alignment="CENTER" text="Øvelse">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="noSets" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="144.0" promptText="Antall sett..." />
-                        <TextField fx:id="noReps" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="146.0" promptText="Antall repetisjoner..." />
-                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="214.0" spacing="5.0">
-                           <children>
-                              <TextField fx:id="weight" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="121.0" promptText="Belastning..." />
-                              <Label alignment="CENTER" contentDisplay="CENTER" text="kg" />
-                           </children>
-                        </HBox>
-                        <Button mnemonicParsing="false" onAction="#saveExercise" text="Lagre" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-      </StackPane>
-   </center>
+<BorderPane prefHeight="853.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="761.0" prefWidth="291.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
+      <VBox alignment="TOP_CENTER" prefHeight="853.0" prefWidth="359.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <Label text="Dato">
                <font>
@@ -103,7 +40,7 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="27.0" prefWidth="162.0" spacing="5.0">
                <children>
-                  <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="60.0" />
+                  <TextField fx:id="duration" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="60.0" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="min" />
                </children>
             </HBox>
@@ -112,30 +49,115 @@
                   <Font size="19.0" />
                </font>
             </Label>
-            <Slider blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="45.0" prefWidth="224.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Slider fx:id="feelingSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" maxWidth="-Infinity" min="1.0" minorTickCount="0" prefHeight="45.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
             <Label text="Prestasjon">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <Slider blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Slider fx:id="achievementSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" maxWidth="-Infinity" min="1.0" minorTickCount="0" prefHeight="45.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Label text="Type trening">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <HBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="208.0" spacing="80.0">
+               <children>
+                  <ToggleButton fx:id="indoorToggle" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="Innendørs" />
+                  <ToggleButton fx:id="outdoorToggle" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Utendørs" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="406.0" spacing="15.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="162.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="airqText" text="Luftkvalitet" textFill="#bfb9b9" />
+                        <Slider fx:id="airqSlider" blockIncrement="1.0" disable="true" majorTickUnit="1.0" max="5.0" maxWidth="-Infinity" min="1.0" minorTickCount="0" prefHeight="45.0" prefWidth="139.0" showTickLabels="true" showTickMarks="true" value="3.0" />
+                        <TextField fx:id="specsNum" disable="true" maxWidth="-Infinity" prefHeight="31.0" prefWidth="141.0" promptText="Antall tilskuere" />
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <VBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="170.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="tempField" alignment="TOP_LEFT" disable="true" maxWidth="-Infinity" prefHeight="31.0" prefWidth="148.0" promptText="Temperatur" />
+                        <TextArea fx:id="weatherArea" disable="true" maxWidth="-Infinity" prefHeight="69.0" prefWidth="148.0" promptText="Værforhold" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             <Label text="Notat">
                <font>
                   <Font size="19.0" />
                </font>
             </Label>
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="262.0" />
+            <TextArea fx:id="note" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="262.0" wrapText="true" />
          </children>
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
       </VBox>
    </left>
-   <right>
-      <FlowPane alignment="CENTER" prefHeight="737.0" prefWidth="304.0" BorderPane.alignment="CENTER">
+   <center>
+      <FlowPane alignment="CENTER_LEFT" prefHeight="737.0" prefWidth="304.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <fx:include fx:id="exercisePane" source="ExercisePane.fxml" />
+            <HBox prefHeight="680.0" prefWidth="511.0" spacing="20.0">
+               <children>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <VBox alignment="CENTER" prefHeight="684.0" prefWidth="466.0" spacing="15.0">
+                     <children>
+                        <Label text="Legg til øvelser:">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="exerciseComboBox" prefWidth="150.0" />
+                        <Label fx:id="exerciseNameLbl" alignment="CENTER" text="Øvelse">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="TOP_CENTER" prefHeight="31.0" prefWidth="425.0" spacing="60.0">
+                           <children>
+                              <ToggleButton fx:id="strengthToggle" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="Styrke" />
+                              <ToggleButton fx:id="conditionToggle" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Kondisjon" />
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="155.0" prefWidth="170.0" spacing="10.0">
+                           <children>
+                              <TextField fx:id="noSets" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="138.0" promptText="Antall sett..." />
+                              <TextField fx:id="noReps" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="139.0" promptText="Antall repetisjoner..." />
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="175.0" spacing="5.0">
+                                 <children>
+                                    <TextField fx:id="weight" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="139.0" promptText="Belastning..." />
+                                    <Label fx:id="kg" alignment="CENTER" contentDisplay="CENTER" text="kg" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="170.0" spacing="5.0">
+                                 <children>
+                                    <TextField fx:id="length" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="139.0" promptText="Lengde.." />
+                                    <Label fx:id="min" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="min" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Button mnemonicParsing="false" onAction="#saveExercise" text="Legg til" />
+                        <TableView fx:id="savedExerciseTable" prefHeight="240.0" prefWidth="448.0">
+                           <columns>
+                              <TableColumn fx:id="nameCol" prefWidth="129.0" text="Øvelse" />
+                              <TableColumn fx:id="setCol" prefWidth="52.0" text="Sett" />
+                              <TableColumn fx:id="repCol" prefWidth="73.0" text="Reps" />
+                              <TableColumn fx:id="weightCol" prefWidth="86.0" text="Belastning" />
+                              <TableColumn fx:id="lengthCol" prefWidth="75.0" text="Lengde" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
       </FlowPane>
-   </right>
+   </center>
+   <bottom>
+      <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="163.0" text="Lagre trening" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

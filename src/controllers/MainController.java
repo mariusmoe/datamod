@@ -1,12 +1,15 @@
 package controllers;
-import Model.Exercise;
 import db.ExerciseFetch;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import models.Exercise;
+import models.SavedExercise;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +17,17 @@ import java.util.List;
 public class MainController {
 
 
+	@FXML private ComboBox<String> hour;
+	@FXML private ComboBox<String> minute;
 
+	@FXML private TextField duration;
+
+	@FXML private Slider feelingSlider;
+	@FXML private Slider achievementSlider;
+
+
+	@FXML private ToggleButton indoorToggle;
+	@FXML private ToggleButton outdoorToggle;
 
 	@FXML private Label airqText;
 	@FXML private Slider airqSlider;
@@ -23,29 +36,176 @@ public class MainController {
 	@FXML private TextField tempField;
 	@FXML private TextArea weatherArea;
 
-	@FXML private ToggleButton indoorToggle;
-	@FXML private ToggleButton outdoorToggle;
+	@FXML private TextArea note;
 
-	@FXML private VBox exContainer;
-	@FXML private ComboBox<String> hour;
-	@FXML private ComboBox<String> minute;
-	
-	@FXML private ExercisePaneController expController;
-	@FXML private TextField weight;
+	@FXML private ComboBox<String> exerciseComboBox;
+	@FXML private Label exerciseNameLbl;
+	@FXML private ToggleButton strengthToggle;
+	@FXML private ToggleButton conditionToggle;
 
     @FXML private TextField noSets;
-
     @FXML private TextField noReps;
-	@FXML private ComboBox<String> exerciseComboBox;
+	@FXML private TextField weight;
+	@FXML private Label kg;
+	@FXML private TextField length;
+	@FXML private Label min;
 
+	@FXML void saveExercise() {
+		int exLength;
+		int exWeight;
+		if (strengthToggle.selectedProperty().getValue()) {
+			exLength = 0;
+			exWeight = Integer.parseInt(weight.getText());
+
+		}
+		else {
+			exWeight = 0;
+			exLength = Integer.parseInt(length.getText());
+		}
+
+		SavedExercise svdExercise = new SavedExercise(exerciseNameLbl.getText(), Integer.parseInt(noSets.getText()), Integer.parseInt(noReps.getText()),exWeight, exLength);
+		exerciseData.add(svdExercise);
+    }
+
+	@FXML private TableView savedExerciseTable;
+	@FXML private TableColumn<SavedExercise, String> nameCol;
+	@FXML private TableColumn<SavedExercise, Integer> setCol;
+	@FXML private TableColumn<SavedExercise, Integer> repCol;
+	@FXML private TableColumn<SavedExercise, Integer> weightCol;
+	@FXML private TableColumn<SavedExercise, Integer> lengthCol;
+
+	/*Observable list of saved exercises that are to be displayed in tableview*/
+	private final ObservableList<SavedExercise> exerciseData = FXCollections.observableArrayList();
+
+	public ObservableList<SavedExercise> getExercises() {
+		return exerciseData;
+	}
+	/*Collection of exercises that exist in the DB*/
 	private Collection<Exercise> exercises;
 
-	@FXML private Label exerciseNameLbl;
-	
-	@FXML
-    void saveExercise() {
 
-    }
+
+
+
+	@FXML private void initialize(){
+
+		conditionToggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue){
+					conditionToggled();
+					strengthToggle.setSelected(false);
+				}
+				else{
+					strengthToggle.setSelected(true);
+
+				}
+			}
+		});
+
+		strengthToggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue) {
+					strengthToggled();
+					conditionToggle.setSelected(false);
+				}
+				else{
+					conditionToggle.setSelected(true);
+				}
+			}
+		});
+
+
+		/*When indoorToggle is selected: run indoorToggled() and deselect outdoorToggle
+		Else (meaning indoorToggle is deselected): select outdoorToggle */
+		indoorToggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> property, Boolean oldValue, Boolean newValue){
+				if (newValue) {
+					indoorToggled();
+					outdoorToggle.setSelected(false);
+				}
+
+				else {
+					outdoorToggle.setSelected(true);
+				}
+
+
+			}
+
+		});
+		/*When outdoorToggle is selected: run outdoorToggled() and deselect indoorToggle
+		Else (meaning outdoorToggle is deselected): select indoorToggle */
+		outdoorToggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				if (newValue) {
+					outdoorToggled();
+					indoorToggle.setSelected(false);
+				}
+				else
+					indoorToggle.setSelected(true);
+			}
+		});
+		fillComboBox();
+		loadExercises();
+		for (Exercise ex : exercises){
+
+			exerciseComboBox.getItems().add(ex.getName());
+		}
+		exerciseComboBox.valueProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				exerciseNameLbl.setText(newValue);
+
+			}
+		});
+
+
+
+		/*Tells the table view what properties that should fill the individual columns*/
+		nameCol.setCellValueFactory(cellData -> cellData.getValue().exNameProperty());
+		setCol.setCellValueFactory(cellData -> cellData.getValue().exSetsProperty().asObject());
+		repCol.setCellValueFactory(cellData -> cellData.getValue().exRepsProperty().asObject());
+		weightCol.setCellValueFactory(cellData -> cellData.getValue().exWeightProperty().asObject());
+		lengthCol.setCellValueFactory(cellData -> cellData.getValue().exLengthProperty().asObject());
+		/*Tells tableview to get items from the observable list exerciseData*/
+		savedExerciseTable.setItems(exerciseData);
+	}
+
+	private void strengthToggled() {
+		strengthEnabler(true);
+		conditionEnabler(false);
+		}
+
+	private void conditionEnabler(boolean enable) {
+		if (enable){
+			length.setDisable(false);
+			min.setTextFill(Paint.valueOf("black"));
+		}
+		else{
+			length.setDisable(true);
+			min.setTextFill(Paint.valueOf("grey"));
+		}
+	}
+
+
+	private void strengthEnabler(boolean enable) {
+		if (enable){
+			weight.setDisable(false);
+			kg.setTextFill(Paint.valueOf("black"));
+		}
+		else {
+			weight.setDisable(true);
+			kg.setTextFill(Paint.valueOf("grey"));
+		}
+	}
+
+	private void conditionToggled() {
+		conditionEnabler(true);
+		strengthEnabler(false);
+	}
 
 	void indoorToggled(){
 		indoorEnabler(true);
@@ -84,60 +244,7 @@ public class MainController {
 		}
 	}
 
-
-	public void initialize(){
-		indoorToggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> property, Boolean oldValue, Boolean newValue){
-				if (newValue) {
-					indoorToggled();
-					outdoorToggle.setSelected(false);
-				}
-
-				else {
-					outdoorToggle.setSelected(true);
-				}
-
-
-			}
-
-		});
-		outdoorToggle.selectedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				if (newValue) {
-					outdoorToggled();
-					indoorToggle.setSelected(false);
-				}
-				else
-					indoorToggle.setSelected(true);
-			}
-		});
-		fillComboBox();
-		loadExercises();
-		for (Exercise ex : exercises){
-
-			exerciseComboBox.getItems().add(ex.getName());
-		}
-		exerciseComboBox.valueProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				exerciseNameLbl.setText(newValue);
-
-			}
-		});
-
-
-		/*ReadOnlyObjectProperty<Exercise> selectionProperty = exercises.getSelectionModel().selectedItemProperty();
-		selectionProperty.addListener((property, oldValue, newValue) -> {
-			expController.exercisePicked(newValue);
-		}
-		);*/
-
-
-	}
-
-
+	/*Fill the hour and minute comboboxes with values*/
 	private void fillComboBox() {
 		List<String> hours = new ArrayList<>(17);
 		List<String> minutes = new ArrayList<>(13);
@@ -154,6 +261,7 @@ public class MainController {
 		
 	}
 
+	/*Instantiates ExerciseFetch, which gets exercises from DB and returns them in getExercises() as Collection<Exercise>*/
 	public void loadExercises(){
 		ExerciseFetch ef = new ExerciseFetch();
 		ef.readExercises("1");

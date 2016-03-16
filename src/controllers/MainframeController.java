@@ -1,6 +1,6 @@
 package controllers;
 
-import Model.Exercise;
+import models.Exercise;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 

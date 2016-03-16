@@ -16,11 +16,11 @@ public class Main extends Application {
 
 			Parent root = FXMLLoader.load((Main.class.getResource("../gui/RootLayout.fxml")));
 			Scene scene = new Scene(root);
-			primaryStage.getIcons().add(new Image("RunningMan.ico"));
+			primaryStage.getIcons().add(new Image("/dagbokapplication/RunningMan.ico"));
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Registrer trening");
-			primaryStage.setMinHeight(900);
-			primaryStage.setMinWidth(850);
+			primaryStage.setMinHeight(1000);
+			primaryStage.setMinWidth(950);
 			primaryStage.show();
 			
 		} catch(Exception e) {
