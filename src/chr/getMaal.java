@@ -95,13 +95,15 @@ public class getMaal {
 	public List<Object> getRow(int id){
 		try {
 			ResultSet queryResult = stmt.executeQuery("select * from maal where maal_id ='id' ");
-			ResultSetMetaData metadata = rs.getMetaData();
-		    int columnCount = metadata.getColumnCount(); 
+ 
 			List<Object> row = new ArrayList<Object>();
-			for(int i=1; i <= columnCount; i++){
-				row.add(row.get(i));
+			while(queryResult.next()){
+				for(int i=1; i <= amountOfColumns; i++){
+					row.add(queryResult.getString(i));
+				}
 			}
-			return row;
+			System.out.println("The row consists of: " + row);
+			return row;				
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
