@@ -14,6 +14,12 @@ public class Main extends Application{
 		primaryStage.setTitle("Maal");
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
+		
+	    MaalController controll= FXMLLoader.getController();
+
+	
+	    //Set Data to FXML through controller
+	    MaalController.fillMaal();
 	}
 	
 	public static void main(String[] args) {

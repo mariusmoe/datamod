@@ -4,6 +4,7 @@ import java.awt.Button;
 import java.awt.TextArea;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import gui.ExercisePaneController;
@@ -26,6 +27,7 @@ public class MaalController implements javafx.fxml.Initializable{
 	@FXML private DatePicker goalDoneAt;
 	@FXML private TextArea goalAchieved;
 	@FXML private Button submitChanges;
+	getMaal retrieve = new getMaal();
 	
 	/**
 	 * This is the constructor for retrieving a goal from the database
@@ -34,9 +36,16 @@ public class MaalController implements javafx.fxml.Initializable{
 	 */
 	public void initialize(URL location, ResourceBundle resources){
 		Maal maal = new Maal();
-	}
-	public MaalController(){
 		goalAchieved.setVisible(false);
+		if(maal_list.getItems() != null){ 
+			maal_list.getItems().clear();
+			}
+		List<Integer> maal = retrieve.retrieveIDs(); 
+		for (int i=1; i <= maal.size(); i++){
+			String idToString = maal.get(i).toString();
+			maal_list.getItems().add(idToString);
+		}
+		System.out.println(maal_list);
 	}
 	
 	/**
@@ -49,9 +58,7 @@ public class MaalController implements javafx.fxml.Initializable{
 	}
 	
 	public void fillMaal(){
-		ArrayList<Integer> maal = new ArrayList<>();
-		ArrayList<Integer> maal = getMaal().retrieveIds();
-		maal_list.getItems().addAll(arg0)
+		
 	}
 	
 	
@@ -86,5 +93,12 @@ public class MaalController implements javafx.fxml.Initializable{
 		catch (Exception e){
 			
 		}
+	}
+	/**
+	 *Returns maal_list 
+	 * @return
+	 */
+	public ComboBox<String> getMaalList(){
+		return maal_list;
 	}
 }
