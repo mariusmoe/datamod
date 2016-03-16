@@ -12,7 +12,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import øving_2.Appointment;
 /**
  * This is the controller for maal
  * @author Christian
@@ -34,7 +33,7 @@ public class MaalController implements javafx.fxml.Initializable{
 	 * Once a goal is selected, all values will be retrieved and inserted into the corresponding boxes
 	 */
 	public void initialize(URL location, ResourceBundle resources){
-		Maal maal = new ();
+		Maal maal = new Maal();
 	}
 	public MaalController(){
 		goalAchieved.setVisible(false);
@@ -51,7 +50,8 @@ public class MaalController implements javafx.fxml.Initializable{
 	
 	public void fillMaal(){
 		ArrayList<Integer> maal = new ArrayList<>();
-		
+		ArrayList<Integer> maal = getMaal().retrieveIds();
+		maal_list.getItems().addAll(arg0)
 	}
 	
 	
