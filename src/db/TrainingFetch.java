@@ -67,12 +67,7 @@ public class TrainingFetch {
 	private void writeResultSet(ResultSet resultSet) throws SQLException {
 		
 		while (resultSet.next()) {
-			/*
-			timeList.add(resultSet.getTimestamp("tidspunkt").toLocalDateTime());
-			durationList.add(resultSet.getInt("varighet"));
-			personalFitList.add(resultSet.getInt("personlig_form"));
-			acchivementList.add(resultSet.getInt("prestasjon"));
-			*/
+
 			ArrayList<Object> arr = new ArrayList<Object>();
 			
 			arr.add(resultSet.getInt("varighet"));
@@ -85,7 +80,7 @@ public class TrainingFetch {
 			System.out.println(arr);
 			
 			trainingMap.put(resultSet.getTimestamp("tidspunkt").toLocalDateTime(), arr);
-			//arr.clear();
+			
 	    }
 		
 		System.out.println(trainingMap);
@@ -110,35 +105,6 @@ public class TrainingFetch {
 		    }
 	    } catch (Exception e) {
 	    }
-	}
-	
-	
-	/**
-	 * @return the timeList
-	 */
-	public ArrayList<LocalDateTime> getTimeList() {
-		return timeList;
-	}
-
-	/**
-	 * @return the durationList
-	 */
-	public ArrayList<Integer> getDurationList() {
-		return durationList;
-	}
-
-	/**
-	 * @return the personalFitList
-	 */
-	public ArrayList<Integer> getPersonalFitList() {
-		return personalFitList;
-	}
-
-	/**
-	 * @return the acchivementList
-	 */
-	public ArrayList<Integer> getAcchivementList() {
-		return acchivementList;
 	}
 	
 	/**
