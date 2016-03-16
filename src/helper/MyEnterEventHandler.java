@@ -1,15 +1,16 @@
 package helper;
 
 import controllers.GetTrainingController;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableCell;
-import javafx.scene.input.MouseEvent;
 
-public class MyEventHandler implements EventHandler<MouseEvent> {
+
+public class MyEnterEventHandler implements EventHandler<ActionEvent> {
 	 
     @Override
-    public void handle(MouseEvent t) {
-        TableCell c = (TableCell) t.getSource();
+    public void handle(ActionEvent t) {
+    	TableCell c = (TableCell) t.getSource();
         int index = c.getIndex();
         String key = c.getAccessibleText();
         //System.out.println("Index of clicked: "+c + "ooo: "+ key + "lll: "+ index);
@@ -26,4 +27,5 @@ public class MyEventHandler implements EventHandler<MouseEvent> {
         System.out.println("email = " + recordList.get(index).getEmail());
         */
     }
+
 }

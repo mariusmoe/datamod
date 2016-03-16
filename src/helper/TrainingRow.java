@@ -28,7 +28,7 @@ public final class TrainingRow {
         //this.maal = new SimpleStringProperty(lName);
         this.performance = new SimpleStringProperty(col.get(2).toString());
         this.maal = new SimpleStringProperty(col.get(3).toString());
-        this.id = new SimpleStringProperty(col.get(3).toString());
+        this.id = new SimpleStringProperty(col.get(4).toString());
     }
 
     public String getTime() {

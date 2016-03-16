@@ -22,12 +22,14 @@ public class ExerciseForTrainingFetch {
 
 	private static Connection connect = null;
 	private static Statement statement = null;
-	private ArrayList<LocalDateTime> timeList = new ArrayList<LocalDateTime>();
-	private ArrayList<Integer> durationList = new ArrayList<Integer>();
-	private ArrayList<Integer> personalFitList = new ArrayList<Integer>();
-	private ArrayList<Integer> acchivementList = new ArrayList<Integer>();
-	
-	private HashMap<LocalDateTime, ArrayList> trainingMap = new HashMap<>();
+	// private ArrayList<LocalDateTime> timeList = new ArrayList<LocalDateTime>();
+	private ArrayList<String> ovelseNavn = new ArrayList<String>();
+	private ArrayList<Integer> belastning = new ArrayList<Integer>();
+	private ArrayList<Integer> sett = new ArrayList<Integer>();
+	private ArrayList<Integer> repetisjoner = new ArrayList<Integer>();
+	private ArrayList<String> beskrivelse = new ArrayList<String>();
+	private ArrayList<String> kategori = new ArrayList<String>();	//dos't have to be present
+	private ArrayList<ArrayList> exForTraining = new ArrayList<ArrayList>();
 
 	private ResultSet resultSet = null;
 	
@@ -36,7 +38,7 @@ public class ExerciseForTrainingFetch {
 	 * @param name training to look up
 	 * @throws Exception Exceptions if connection fails
 	 */
-	public void readDataBase(String name) throws Exception {
+	public void readDataBase(String idtrening) throws Exception {
 		System.out.println("trid to connect...");
 		try {
 			//mysql.stud.ntnu.no
@@ -47,9 +49,11 @@ public class ExerciseForTrainingFetch {
 
 			statement = connect.createStatement();
 	      // Result set get the result of the SQL query
-			resultSet = statement.executeQuery("select * from dag.trening "+
+			resultSet = statement.executeQuery("select * from dag.trening " +
 					"inner join dag.ovelse_has_trening on trening.idtrening=ovelse_has_trening.trening_idtrening " +
-					"inner join dag.ovelse on ovelse_has_trening.ovelse_navn=ovelse.navn");// where idtrening = '" + name + "'");
+					"inner join dag.ovelse on ovelse_has_trening.ovelse_navn=ovelse.navn " + 
+					"where idtrening = " + Integer.parseInt(idtrening));
+			
 			System.out.println("Connection SUCCESS - Querry SUCCESS");
 			writeResultSet(resultSet);
 	      
@@ -69,29 +73,14 @@ public class ExerciseForTrainingFetch {
 	private void writeResultSet(ResultSet resultSet) throws SQLException {
 		
 		while (resultSet.next()) {
-			/*
-			timeList.add(resultSet.getTimestamp("tidspunkt").toLocalDateTime());
-			durationList.add(resultSet.getInt("varighet"));
-			personalFitList.add(resultSet.getInt("personlig_form"));
-			acchivementList.add(resultSet.getInt("prestasjon"));
-			*/
-			ArrayList<Object> arr = new ArrayList<Object>();
-			
-			arr.add(resultSet.getInt("varighet"));
-			arr.add(resultSet.getInt("personlig_form"));
-			arr.add(resultSet.getInt("prestasjon"));
-			arr.add(resultSet.getString("maal"));
-			arr.add(resultSet.getInt("idtrening"));
-			//add more columns from result-set here ->
-			
-			System.out.println(arr);
-			
-			trainingMap.put(resultSet.getTimestamp("tidspunkt").toLocalDateTime(), arr);
-			//arr.clear();
+			//name = ((city.getName() == null) ? "N/A" : city.getName());
+			ovelseNavn.add(resultSet.getString("ovelse_navn"));
+			belastning.add(resultSet.getInt("belastning"));
+			sett.add(resultSet.getInt("sett"));
+			repetisjoner.add(resultSet.getInt("repetisjoner"));
+			beskrivelse.add(resultSet.getString("beskrivelse"));
+			kategori.add(resultSet.getString("kategori_knavn"));			
 	    }
-		
-		System.out.println(trainingMap);
-		
 	  }
 	
 	/**
@@ -112,5 +101,41 @@ public class ExerciseForTrainingFetch {
 		    }
 	    } catch (Exception e) {
 	    }
+	}
+	
+	
+	public ArrayList<String> getOvelseNavn() {
+		return ovelseNavn;
+	}
+
+	public ArrayList<Integer> getBelastning() {
+		return belastning;
+	}
+
+	public ArrayList<Integer> getSett() {
+		return sett;
+	}
+
+	public ArrayList<Integer> getRepetisjoner() {
+		return repetisjoner;
+	}
+
+	public ArrayList<String> getBeskrivelse() {
+		return beskrivelse;
+	}
+
+	public ArrayList<String> getKategori() {
+		return kategori;
+	}
+	
+	public ArrayList<ArrayList> getExForTraining() {
+		exForTraining.add(ovelseNavn);
+		exForTraining.add(belastning);
+		exForTraining.add(sett);
+		exForTraining.add(repetisjoner);
+		exForTraining.add(beskrivelse);
+		exForTraining.add(kategori);
+		
+		return exForTraining;
 	}
 }
