@@ -1,6 +1,8 @@
 package chr;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 public class Maal extends Application {
@@ -8,10 +10,10 @@ public class Maal extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 	
-	    FXMLLoader loader = new FXMLLoader(getClass().getResource("Maal.fxml"));
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("gui.Maal.fxml"));
 	    Parent root = loader.load();
 	
-	    MyController myController = loader.getController();
+	    MaalController myController = loader.getController();
 	
 	    Scene scene = new Scene(root);
 	    stage.setScene(scene);

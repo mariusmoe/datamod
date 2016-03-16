@@ -2,28 +2,73 @@ package chr;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Scanner;
 /**
- * This method writes to maal.
+ * This class writes to maal.
  * @author Eier
  *
  */
 public class writeMaal {
+	Connection connection; 
+	Statement stmt;
+	
+	public writeMaal(){
+		try{
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root", "eple");;
+			this.stmt = connection.createStatement();
+			
+		}catch(Exception exc){
+			exc.printStackTrace();
+		}
+	}
 	
 	private static boolean exists(int maal_id){
 		getMaal get = new getMaal();
-		int amountOfColumns = get.getColumnCount();
-		System.out.println("The current amount of columns are: " + amountOfColumns);
+		int amountOfColumns = get.getRows();
+		System.out.println("The current amount of rows is: " + amountOfColumns);
 		if (maal_id > amountOfColumns){
 			return true;
 		}
 		return false;
 	}
+	
+	/**
+	 * This method is used by the controller to create a new maal-object in the DB
+	 */
+	public void createNewGoal(LocalDate startDate, LocalDate achievedDate, String goal, LocalDate endDate){
+		try {
+		String createSqlEntry = 
+				"insert into maal"
+				+	" Values (null, startDate, achievedDate, goal, endDate)";
+			Statement goalStmt = connection.createStatement();
+			goalStmt.execute(createSqlEntry);
+			
+			System.out.println("New goal successfully created");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateGoal(int id,LocalDate startDate, LocalDate achievedDate, String goal, LocalDate endDate){
+		try{
+			String updateSqlEntry = "update maal set (id, startDate, achievedDate, goal, endDate) where id = maal_id ";
+			stmt.execute(updateSqlEntry);
+			System.out.println("Goal updated");
+			
+		}catch(Exception exc){
+			exc.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 		try{
-			Connection myCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root1", "eple");
+			Connection myCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root", "eple");
 			
 			Statement myStmt = myCon.createStatement();
 			Scanner scanner = new Scanner(System.in);

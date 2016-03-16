@@ -28,7 +28,7 @@ public class getMaal {
 	public getMaal(){
 		try{
 			//Set up the connection to the database
-			this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root1", "eple");
+			this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root", "eple");
 			this.stmt = con.createStatement();
 			this.rs = stmt.executeQuery("select * from maal");
 			this.metadata = rs.getMetaData();
@@ -64,6 +64,15 @@ public class getMaal {
 		return list;
 	}
 	
+	/**
+	 * Gets the amount of rows
+	 * @return
+	 */
+	public int getRows(){
+		List<Integer> allRows = retrieveIDs();
+		int rows = allRows.size();
+		return rows;
+	}
 	
 	/**
 	 * This method returns all maal-entries
@@ -81,6 +90,24 @@ public class getMaal {
 		}catch(Exception exc){
 		exc.printStackTrace();
 		}
+	}
+	
+	public List<Object> getRow(int id){
+		try {
+			ResultSet queryResult = stmt.executeQuery("select * from maal where maal_id ='id' ");
+			ResultSetMetaData metadata = rs.getMetaData();
+		    int columnCount = metadata.getColumnCount(); 
+			List<Object> row = new ArrayList<Object>();
+			for(int i=1; i <= columnCount; i++){
+				row.add(row.get(i));
+			}
+			return row;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	/**

@@ -13,5 +13,8 @@ public class MainframeController {
 
     @FXML
     private Tab trainingTab;
+    
+    @FXML
+    private Tab maalTab;
 
 }

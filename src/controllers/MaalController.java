@@ -1,18 +1,16 @@
-package chr;
+package controllers;
 
-
-
+import java.awt.Button;
+import java.awt.TextArea;
 import java.time.LocalDate;
 import java.util.List;
 
-
+import chr.Maal;
 import chr.getMaal;
 import chr.writeMaal;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
 /**
  * This is the controller for maal
  * @author Christian
@@ -36,7 +34,6 @@ public class MaalController{
 	 * It will let the view be empty if no goal is selected.
 	 * Once a goal is selected, all values will be retrieved and inserted into the corresponding boxes
 	 */
-	@FXML
 	public void initialize(){
 		goalBox.setText("");
 		goalStart.setValue(null);
@@ -49,7 +46,7 @@ public class MaalController{
 			maal_list.getItems().clear();
 			}
 		List<Integer> maalList = retrieve.retrieveIDs(); 
-		for (int i=0; i <= maalList.size()-1; i++){
+		for (int i=1; i <= maalList.size(); i++){
 			String idToString = maalList.get(i).toString();
 			maal_list.getItems().add(idToString);
 		}
@@ -63,7 +60,7 @@ public class MaalController{
 	 */
 	public void maalSelect(){
 		int id = Integer.parseInt(maal_list.getValue());
-		retrieve.getRow(id);
+		fillMaal(id);
 	}
 	
 	/**
@@ -103,9 +100,7 @@ public class MaalController{
 	}
 	
 	public void changeGoal(){
-		if(goalBox.getText().equals("")){
-			goalBox.setText("Must fill this box");
-		}
+		goalBox.getText();
 	}
 	
 	public void changeAchieved(){
@@ -114,9 +109,7 @@ public class MaalController{
 		}
 		goalAchieved.setVisible(false);
 	}
-	/**
-	 * This method creates a new goal with what is inside each box after the createGoal-button is clicked.
-	 */
+	
 	public void createGoal(){
 		writeNew.createNewGoal(goalStart.getValue(), goalDoneAt.getValue(), goalBox.getText(), goalEnd.getValue());
 	}
@@ -124,8 +117,7 @@ public class MaalController{
 	public void submitChange(){
 		try{
 			//Update the existing maal-object with contents of all fx:ids
-			int current = Integer.parseInt(maal_list.getValue());
-			writeNew.updateGoal(current,goalStart.getValue(), goalDoneAt.getValue(), goalBox.getText(), goalEnd.getValue());
+			
 			changeStart();
 			changeEnd();
 			changeGoal();
