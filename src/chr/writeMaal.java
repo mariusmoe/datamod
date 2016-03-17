@@ -28,7 +28,8 @@ public class writeMaal {
 			this.stmt = connection.createStatement();
 			
 		}catch(Exception exc){
-			exc.printStackTrace();
+			System.out.println("Could not initiate connection. Try again");
+			//exc.printStackTrace();
 		}
 	}
 	/**
@@ -64,8 +65,8 @@ public class writeMaal {
 			System.out.println("New goal successfully created");
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not create a new goal. Try again");
+			//e.printStackTrace();
 		}
 	}
 	/**
@@ -75,8 +76,7 @@ public class writeMaal {
 	public void updateGoal(Maal maal){
 		PreparedStatement pstmt;
 		try{
-			
-			String updateSqlEntry = "UPDATE maal SET (fra_dato=?, oppnaadd_dato=?, maal=?, til_dato=?) WHERE maal_id=?";
+			String updateSqlEntry = "UPDATE maal (fra_dato, oppnaadd_dato, maal, til_dato) SET (?, ?, ?, ?) WHERE maal_id=?";
 			
 			pstmt = this.connection.prepareStatement(updateSqlEntry);
 			
@@ -87,16 +87,18 @@ public class writeMaal {
 			pstmt.setInt(5, maal.id);
 			
 			
-			System.out.println("Query!!!!: "+pstmt);
+			System.out.println("Query: "+pstmt);
 			
-			
-			pstmt.executeUpdate();
+			System.out.println(stmt.execute(updateSqlEntry));
+			//(updateSqlEntry);
+			//pstmt.executeUpdate();
 			
 			System.out.println("Goal "+maal.id+" updated");
 			
 			pstmt.close();
 			
 		}catch(Exception exc){
+			//System.out.println("Could not update goal, please try again: If the problem persists, contact admins");
 			exc.printStackTrace();
 		}
 	}
@@ -113,7 +115,7 @@ public class writeMaal {
 			pstmt.executeUpdate();
 			System.out.println("Målet er slettet");
 		}catch(Exception exc){
-			
+			System.out.println("Goal could not be deleted");
 		}
 		
 	}

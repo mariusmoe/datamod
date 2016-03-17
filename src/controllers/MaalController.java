@@ -54,10 +54,15 @@ public class MaalController{
 		goalAchieved.setVisible(false);
 		goalDelete.setVisible(false);
 		
-		
-		if(maal_list.getItems() != null){ 
+		//This generates the goal-list
+		if(maal_list.getItems() != null){
+			try{
 			maal_list.getItems().clear();
+			//maal_list = new ComboBox<String>();
+			}catch(Exception e){
+				System.out.println("ASPODHYASOPDIASOIDHJPÅ");
 			}
+		}
 		List<Integer> maalList = retrieve.retrieveIDs(); 
 		for (int i=0; i <= maalList.size()-1; i++){
 			String idToString = maalList.get(i).toString();
@@ -87,9 +92,11 @@ public class MaalController{
 	 * parameter is the ID to the wished id to be retrieved from DB
 	 */
 	public void maalSelect(){
-		int id = Integer.parseInt(maal_list.getValue());
-		retrieve.getRow(id);
-		fillMaal(id);
+		if (maal_list.getValue() != null){
+			int id = Integer.parseInt(maal_list.getValue());
+			retrieve.getRow(id);
+			fillMaal(id);			
+		}
 	}
 	
 	/**
@@ -98,7 +105,7 @@ public class MaalController{
 	 */
 	public void fillMaal(int ID){
 		Maal maal = retrieve.getRow(ID);
-		System.out.println(maal);
+		//System.out.println(maal);
 		goalStart.setValue(maal.fraDato);
 		goalDoneAt.setValue(maal.oppnaaddDato);
 		goalBox.setText(maal.maal);
@@ -164,6 +171,7 @@ public class MaalController{
 		newMaal.maal = goalBox.getText();
 		
 		writeNew.createNewGoal(newMaal);
+		initialize();
 	}
 	
 	/**

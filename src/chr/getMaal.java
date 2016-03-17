@@ -41,7 +41,8 @@ public class getMaal {
 			retrieveMaal();
 		}
 		catch(Exception exc){
-			exc.printStackTrace();
+			System.out.println("Could not set up connection to retrieve from db");
+			//exc.printStackTrace();
 		}
 	}
 	
@@ -58,8 +59,8 @@ public class getMaal {
 				list.add(maal_id);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Retrieval of ids failed, could not fill Goal-list");
+			//e.printStackTrace();
 		}
 		return list;
 	}
@@ -81,13 +82,13 @@ public class getMaal {
 	public ArrayList<Maal> getAll(){
 		try {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM maal");
-			System.out.println("Query: "+pstmt);
+			//System.out.println("Query: "+pstmt);
 			ResultSet queryResult = pstmt.executeQuery();
 
 			return Maal.fromResultSet(queryResult);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Could not retrieve goals from db");
+			//e.printStackTrace();
 		}
 		return null;
 	}
@@ -106,7 +107,8 @@ public class getMaal {
 				//System.out.println(row);
 			}
 		}catch(Exception exc){
-		exc.printStackTrace();
+			System.out.println("Could not retrieve the wished goal from db");
+		//exc.printStackTrace();
 		}
 	}
 	/**
@@ -118,7 +120,7 @@ public class getMaal {
 		try {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM maal WHERE maal_id=?");
 			pstmt.setInt(1, id);
-			System.out.println("Query: "+pstmt);
+			//System.out.println("Query: "+pstmt);
 			ResultSet queryResult = pstmt.executeQuery();
 
 			ArrayList<Maal> maalList = Maal.fromResultSet(queryResult);
@@ -127,8 +129,8 @@ public class getMaal {
 			}
 			return maalList.get(0);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("The entry could not be retrieved");
+			//e.printStackTrace();
 		}
 		return null;
 	}

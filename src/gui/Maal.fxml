@@ -17,7 +17,7 @@
             <Button fx:id="submitChanges" layoutX="280.0" layoutY="615.0" mnemonicParsing="false" onAction="#submitChange" text="Lagre endringer" />
             <DatePicker fx:id="goalStart" layoutX="311.0" layoutY="82.0" onAction="#changeStart" promptText="Goal started at" />
             <DatePicker fx:id="goalEnd" layoutX="562.0" layoutY="82.0" onAction="#changeEnd" promptText="Goal ends at" />
-            <DatePicker fx:id="goalDoneAt" layoutX="311.0" layoutY="426.0" onAction="#changeAchieved" promptText="Goal achieved at" />
+            <DatePicker fx:id="goalDoneAt" layoutX="311.0" layoutY="426.0" promptText="Goal achieved at" />
             <Button fx:id="newGoal" layoutX="427.0" layoutY="615.0" mnemonicParsing="false" onAction="#createGoal" text="Opprett nytt mål" />
             <Button fx:id="goalDelete" layoutX="379.0" layoutY="671.0" mnemonicParsing="false" onAction="#onDelete" text="Fjern mål" />
          </children>
