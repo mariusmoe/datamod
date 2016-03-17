@@ -1,4 +1,4 @@
-package chr;
+package maalApp;
 
 import java.time.Instant;
 import java.time.LocalDate;

@@ -8,9 +8,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-import chr.getMaal;
-import chr.Maal;
-import chr.writeMaal;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -18,6 +15,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import maalApp.Maal;
+import maalApp.getMaal;
+import maalApp.writeMaal;
 /**
  * This is the controller for maal
  * @author Christian

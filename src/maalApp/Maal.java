@@ -1,4 +1,4 @@
-package chr;
+package maalApp;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

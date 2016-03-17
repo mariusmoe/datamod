@@ -1,4 +1,4 @@
-package chr;
+package maalApp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
