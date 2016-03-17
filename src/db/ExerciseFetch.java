@@ -1,6 +1,8 @@
 package db;
 
-import gui.Exercise;
+
+import models.Exercise;
+
 
 import java.sql.*;
 import java.util.ArrayList;

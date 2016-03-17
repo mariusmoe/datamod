@@ -1,7 +1,10 @@
-package gui;
+package controllers;
 
+import models.Exercise;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
+
+import java.util.Collection;
 
 public class MainframeController {
 
@@ -16,5 +19,13 @@ public class MainframeController {
     
     @FXML
     private Tab maalTab;
+
+    protected Collection<Exercise> exercises;
+
+    public void initialize(){
+
+
+    }
+
 
 }
