@@ -19,7 +19,9 @@ import javafx.scene.control.TextArea;
 public class writeMaal {
 	Connection connection; 
 	Statement stmt;
-	
+	/**
+	 * Establishes connection with db to write entries
+	 */
 	public writeMaal(){
 		try{
 			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root", "eple");;
@@ -29,7 +31,11 @@ public class writeMaal {
 			exc.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Testmethod to retrieve existing row. Made to bugtest
+	 * @param maal_id
+	 * @return
+	 */
 	private static boolean exists(int maal_id){
 		getMaal get = new getMaal();
 		int amountOfColumns = get.getRows();
@@ -62,13 +68,17 @@ public class writeMaal {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * This method updates the selected goal
+	 * @param maal
+	 */
 	public void updateGoal(Maal maal){
+		PreparedStatement pstmt;
 		try{
 			
 			String updateSqlEntry = "UPDATE maal SET (fra_dato=?, oppnaadd_dato=?, maal=?, til_dato=?) WHERE maal_id=?";
 			
-			PreparedStatement pstmt = this.connection.prepareStatement(updateSqlEntry);
+			pstmt = this.connection.prepareStatement(updateSqlEntry);
 			
 			pstmt.setDate(1, Date.valueOf(maal.fraDato));
 			pstmt.setDate(2, maal.oppnaaddDato == null ? null : Date.valueOf(maal.oppnaaddDato));
@@ -84,11 +94,17 @@ public class writeMaal {
 			
 			System.out.println("Goal "+maal.id+" updated");
 			
+			pstmt.close();
+			
 		}catch(Exception exc){
 			exc.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Deletes the selected goal from db.
+	 * @param id
+	 */
 	public void deleteGoal(int id){
 		try{
 			String deleteSqlEntry = "DELETE from maal where maal_id=?";
@@ -101,6 +117,5 @@ public class writeMaal {
 		}
 		
 	}
-	
 	
 }

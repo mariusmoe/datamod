@@ -24,7 +24,7 @@ public class getMaal {
 	private ResultSetMetaData metadata;
 	
 	/**
-	 * Constructor for getMaal
+	 * Sets ups connection to retrieve from db
 	 */
 	public getMaal(){
 		try{
@@ -42,9 +42,7 @@ public class getMaal {
 		}
 		catch(Exception exc){
 			exc.printStackTrace();
-		}/*finally{
-			close();
-		}*/
+		}
 	}
 	
 	/**
@@ -76,6 +74,10 @@ public class getMaal {
 		return rows;
 	}
 	
+	/**
+	 * Gets all the entries from db
+	 * @return
+	 */
 	public ArrayList<Maal> getAll(){
 		try {
 			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM maal");
@@ -130,6 +132,7 @@ public class getMaal {
 		}
 		return null;
 	}
+	
 	
 	/**
 	 * Close database connection

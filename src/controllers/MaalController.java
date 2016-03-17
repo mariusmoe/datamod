@@ -8,7 +8,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-import chr.Maaladas;
 import chr.getMaal;
 import chr.Maal;
 import chr.writeMaal;
@@ -66,7 +65,9 @@ public class MaalController{
 		}
 		
 		goalDelete.textProperty().addListener(new ChangeListener<String>(){
-
+			/**
+			 * Makes the deletebutton appear/dissappear whether a goal has been selected or not
+			 */
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				if (goalDelete.getText().length() != 0){
@@ -77,6 +78,7 @@ public class MaalController{
 					goalDelete.setVisible(false);
 				}
 		}});
+
 	}
 	
 	/**
@@ -108,7 +110,9 @@ public class MaalController{
 		}
 	}
 	
-	
+	/**
+	 * Listens to changes in goalStartDate
+	 */
 	public void changeStart(){
 		if(goalStart.getValue() == null) {
 			goalStart.setPromptText("You need to fill this");
@@ -118,6 +122,9 @@ public class MaalController{
 		}
 	}
 	
+	/**
+	 * Listens to changes in goalEndDate
+	 */
 	public void changeEnd(){
 		if(goalEnd.getValue() == null) {
 			goalEnd.setPromptText("You need to fill this");
@@ -127,18 +134,24 @@ public class MaalController{
 		}
 	}
 	
+	/**
+	 * Listens to changes in goal
+	 */
 	public void changeGoal(){
 		if(goalBox.getText().equals("")){
 			goalBox.setText("Must fill this box");
 		}
 	}
-	
+	/**
+	 * sets the notification window to visible if goal-date has been set
+	 */
 	public void changeAchieved(){
-		if(goalDoneAt.getAccessibleText() != null){
-			goalAchieved.setVisible(true);
+		if(goalDoneAt.getValue() == null){
+			goalAchieved.setVisible(false);
 		}
-		goalAchieved.setVisible(false);
+		goalAchieved.setVisible(true);
 	}
+	
 	/**
 	 * This method creates a new goal with what is inside each box after the createGoal-button is clicked.
 	 */
@@ -153,6 +166,9 @@ public class MaalController{
 		writeNew.createNewGoal(newMaal);
 	}
 	
+	/**
+	 * Calls the delete method in writeMaal and runs and update on the view
+	 */
 	public void onDelete(){
 		//System.out.println("Size of list: " + maalList.size());
 		int id = Integer.parseInt(maal_list.getValue());
@@ -161,7 +177,10 @@ public class MaalController{
 		initialize();
 		
 	}
-
+	
+	/**
+	 * Allows you to update a sql entry
+	 */
 	public void submitChange(){
 		try{
 			//Update the existing maal-object with contents of all fx:ids
@@ -178,10 +197,10 @@ public class MaalController{
 			writeNew.updateGoal(newMaal);
 			
 			//writeNew.updateGoal(current,goalStart.getValue(), goalDoneAt.getValue(), goalBox.getText(), goalEnd.getValue());
-			changeStart();
+			/*changeStart();
 			changeEnd();
 			changeGoal();
-			changeAchieved();
+			changeAchieved();*/
 			
 		}
 		catch (Exception e){
