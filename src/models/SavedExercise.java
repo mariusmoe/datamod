@@ -24,7 +24,7 @@ public class SavedExercise {
 
     public StringProperty exNameProperty() { return exName;}
 
-    public BooleanProperty getExStrengthTrue(){ return exStrengthTrue;}
+    public boolean isStrength(){ return isStrength;}
 
 
 
@@ -38,24 +38,35 @@ public class SavedExercise {
     public int getExReps() {
         return exReps.get();
     }
-
+    /*Because of a flaw in our database design that was discovered too late in the project, we use this workaround to assign the length of a cardioworkout as the 'weight' of the workout*/
     public int getExWeight() {
-        return exWeight.get();
+        if (isStrength())
+            return exWeight.getValue();
+        return exLength.getValue();
     }
 
 
     private IntegerProperty exReps;
     private IntegerProperty exWeight;
-    private BooleanProperty exStrengthTrue;
+    private boolean isStrength;
+    private IntegerProperty exLength;
 
 
-    public SavedExercise(String name, int sets, int reps, int weight, boolean strengthTrue){
+    public SavedExercise(String name, int sets, int reps, int weight, boolean isStrength){
 
         exName = new SimpleStringProperty(name);
         exSets = new SimpleIntegerProperty(sets);
         exReps = new SimpleIntegerProperty(reps);
-        exWeight = new SimpleIntegerProperty(weight);
-        exStrengthTrue = new SimpleBooleanProperty(strengthTrue);
+        if (isStrength){
+            exWeight = new SimpleIntegerProperty(weight);;
+            exLength = new SimpleIntegerProperty(0);;
+        }
+        else {
+            exWeight = new SimpleIntegerProperty(0);
+            exLength = new SimpleIntegerProperty(weight);
+        }
+
+        this.isStrength = isStrength;
 
 
     }
@@ -65,12 +76,7 @@ public class SavedExercise {
     }
 
 
-
-
-
-
-
-
-
-
+    public IntegerProperty exLengthProperty() {
+        return exLength;
+    }
 }
