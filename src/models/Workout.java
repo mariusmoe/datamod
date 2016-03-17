@@ -9,12 +9,35 @@ import java.util.List;
 
 public class Workout {
 
+	private LocalDate date;
+	private LocalTime time;
+	private int duration;
+	private int form;
+	private int achievement;
+	private String note;
+
+	//Outdoor fields
+	private int temp;
+	private String weather;
+
+	//Indoor fields
+	private int spectatorsNum;
+	private int airquality;
+
+	/*Constructor which initializes only the fields that are common for both indoor and outdoor workouts. These other fields are set in separate methods that caller must use*/
 	public Workout(LocalDate date, LocalTime time, int duration, int form, int achievement, String note){
+		this.date = date;
+		this.time = time;
+		this.duration = duration;
+		this.form = form;
+		this.achievement = achievement;
+		this.note = note;
 
 	}
 
 	public Timestamp getDateAsTimestamp(){
 		LocalDateTime datetime = getDate().atTime(getTime());
+
 		Timestamp timestamp = Timestamp.valueOf(datetime);
 		return timestamp;
 	}
@@ -46,12 +69,6 @@ public class Workout {
 		return exerciseIds;
 	}
 
-	private LocalDate date;
-	private LocalTime time;
-	private int duration;
-	private int form;
-	private int achievement;
-	private String note;
 
 	public int getTemp() {
 		return temp;
@@ -61,12 +78,6 @@ public class Workout {
 		return weather;
 	}
 
-	//Outdoor fields
-	private int temp;
-	private String weather;
-
-	//Indoor fields
-	private int spectatorsNum;
 
 	public int getAirquality() {
 		return airquality;
@@ -76,7 +87,6 @@ public class Workout {
 		return spectatorsNum;
 	}
 
-	private int airquality;
 
 	private List<String> exerciseIds = new ArrayList<>();
 
