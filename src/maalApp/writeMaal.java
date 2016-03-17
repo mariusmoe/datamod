@@ -77,7 +77,7 @@ public class writeMaal {
 		PreparedStatement pstmt;
 		try{
 			
-			String updateSqlEntry = "UPDATE maal (fra_dato, oppnaadd_dato, maal, til_dato) SET (?, ?, ?, ?) WHERE maal_id=?";
+			String updateSqlEntry = "UPDATE maal SET fra_dato=?, oppnaadd_dato=?, maal=?, til_dato=? WHERE maal_id=?";
 			
 			pstmt = this.connection.prepareStatement(updateSqlEntry);
 			
@@ -88,7 +88,7 @@ public class writeMaal {
 			pstmt.setInt(5, maal.id);
 			
 			
-			System.out.println("Query: "+pstmt);
+			//System.out.println("Query: "+pstmt);
 			
 			//System.out.println(stmt.execute(updateSqlEntry));
 			//(updateSqlEntry);
