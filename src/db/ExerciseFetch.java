@@ -25,7 +25,7 @@ public class ExerciseFetch {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/dag";
     static final String USER = "root";
-    static final String PASS = null;
+    static final String PASS = "eple";
 
 
     public Collection<Exercise> getExercises() {
@@ -43,7 +43,7 @@ public class ExerciseFetch {
         try {
             Class.forName(JDBC_DRIVER);
             System.out.println("Connecting to a selected database...");
-            connect = DriverManager.getConnection(DB_URL, USER, PASS);
+            connect = DriverManager.getConnection(DB_URL, USER, "eple");
             System.out.println("Connected database successfully...");
             PreparedStatement prstmnt = null;
             String get = "SELECT * from dag.ovelse";

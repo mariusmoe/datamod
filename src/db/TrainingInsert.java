@@ -29,7 +29,7 @@ public class TrainingInsert {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/dag";
     static final String USER = "root";
-    static final String PASS = null;
+    static final String PASS = "eple";
 
     public void setConnection(){
 
