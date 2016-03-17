@@ -76,6 +76,7 @@ public class writeMaal {
 	public void updateGoal(Maal maal){
 		PreparedStatement pstmt;
 		try{
+			
 			String updateSqlEntry = "UPDATE maal (fra_dato, oppnaadd_dato, maal, til_dato) SET (?, ?, ?, ?) WHERE maal_id=?";
 			
 			pstmt = this.connection.prepareStatement(updateSqlEntry);
@@ -89,13 +90,13 @@ public class writeMaal {
 			
 			System.out.println("Query: "+pstmt);
 			
-			System.out.println(stmt.execute(updateSqlEntry));
+			//System.out.println(stmt.execute(updateSqlEntry));
 			//(updateSqlEntry);
 			//pstmt.executeUpdate();
 			
 			System.out.println("Goal "+maal.id+" updated");
 			
-			pstmt.close();
+			//pstmt.close();
 			
 		}catch(Exception exc){
 			//System.out.println("Could not update goal, please try again: If the problem persists, contact admins");

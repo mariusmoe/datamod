@@ -75,9 +75,8 @@ public class MaalController{
 			 */
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				if (goalDelete.getText().length() != 0){
+				if (maal_list.getValue().length() != 0){
 					goalDelete.setVisible(true);
-					//sluttDato.setVisible(true);
 				}
 				else{
 					goalDelete.setVisible(false);
@@ -95,7 +94,8 @@ public class MaalController{
 		if (maal_list.getValue() != null){
 			int id = Integer.parseInt(maal_list.getValue());
 			retrieve.getRow(id);
-			fillMaal(id);			
+			fillMaal(id);
+			//changeAchieved();
 		}
 	}
 	
