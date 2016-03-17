@@ -92,7 +92,7 @@ public class writeMaal {
 			
 			//System.out.println(stmt.execute(updateSqlEntry));
 			//(updateSqlEntry);
-			//pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 			System.out.println("Goal "+maal.id+" updated");
 			
