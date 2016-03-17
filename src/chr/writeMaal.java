@@ -2,10 +2,15 @@ package chr;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import javafx.scene.control.TextArea;
 /**
  * This class writes to maal.
  * @author Eier
@@ -38,13 +43,17 @@ public class writeMaal {
 	/**
 	 * This method is used by the controller to create a new maal-object in the DB
 	 */
-	public void createNewGoal(LocalDate startDate, LocalDate achievedDate, String goal, LocalDate endDate){
+	public void createNewGoal(Maal maal){
 		try {
-		String createSqlEntry = 
-				"insert into maal"
-				+	" Values (null, startDate, achievedDate, goal, endDate)";
-			Statement goalStmt = connection.createStatement();
-			goalStmt.execute(createSqlEntry);
+			String createSqlEntry = "INSERT INTO maal (fra_dato, til_dato, oppnaadd_dato, maal) VALUES (?, ?, ?, ?)";
+			PreparedStatement pstmt = connection.prepareStatement(createSqlEntry);
+			
+			pstmt.setDate(1, Date.valueOf(maal.fraDato)); //Converts a util.Date instance into an sql.Date instance that can be understood by the prepared statement.
+			pstmt.setDate(2, Date.valueOf(maal.tilDato));
+			pstmt.setDate(3, maal.oppnaaddDato == null ? null : Date.valueOf(maal.oppnaaddDato));
+			pstmt.setString(4, maal.maal);
+			
+			pstmt.executeUpdate();
 			
 			System.out.println("New goal successfully created");
 			
@@ -54,41 +63,44 @@ public class writeMaal {
 		}
 	}
 	
-	public void updateGoal(int id,LocalDate startDate, LocalDate achievedDate, String goal, LocalDate endDate){
+	public void updateGoal(Maal maal){
 		try{
-			String updateSqlEntry = "update maal set (id, startDate, achievedDate, goal, endDate) where id = maal_id ";
-			stmt.execute(updateSqlEntry);
-			System.out.println("Goal updated");
+			
+			String updateSqlEntry = "UPDATE maal SET (fra_dato=?, oppnaadd_dato=?, maal=?, til_dato=?) WHERE maal_id=?";
+			
+			PreparedStatement pstmt = this.connection.prepareStatement(updateSqlEntry);
+			
+			pstmt.setDate(1, Date.valueOf(maal.fraDato));
+			pstmt.setDate(2, maal.oppnaaddDato == null ? null : Date.valueOf(maal.oppnaaddDato));
+			pstmt.setString(3, maal.maal);
+			pstmt.setDate(4, Date.valueOf(maal.tilDato));
+			pstmt.setInt(5, maal.id);
+			
+			
+			System.out.println("Query!!!!: "+pstmt);
+			
+			
+			pstmt.executeUpdate();
+			
+			System.out.println("Goal "+maal.id+" updated");
 			
 		}catch(Exception exc){
 			exc.printStackTrace();
 		}
 	}
 	
-	public static void main(String[] args) {
-		
+	public void deleteGoal(int id){
 		try{
-			Connection myCon = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag", "root", "eple");
+			String deleteSqlEntry = "DELETE from maal where maal_id=?";
+			PreparedStatement pstmt = this.connection.prepareStatement(deleteSqlEntry);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+			System.out.println("Målet er slettet");
+		}catch(Exception exc){
 			
-			Statement myStmt = myCon.createStatement();
-			Scanner scanner = new Scanner(System.in);
-			System.out.println("Enter maal_id: ");
-			int maal_id = scanner.nextInt();
-			//String sql = "insert into maal"
-			//		+ " (maal_id, fra_data, oppnaadd_dato, maal, til_dato)"
-			//		+ " values ('5', '2016-07-20', '2016-08-10', 'Delta på triatlon', '2016-08-20')";
-			
-			if (!exists(maal_id)){
-				//myStmt.executeUpdate(sql);
-				System.out.println("maal_id exists, please consult programmers");
-			}else{
-				System.out.println("Insert complete");	
-			}
-			scanner.close();
-		}
-		catch(Exception exc){
-			exc.printStackTrace();
 		}
 		
 	}
+	
+	
 }

@@ -2,6 +2,7 @@ package chr;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -41,7 +42,9 @@ public class getMaal {
 		}
 		catch(Exception exc){
 			exc.printStackTrace();
-		}
+		}/*finally{
+			close();
+		}*/
 	}
 	
 	/**
@@ -55,7 +58,6 @@ public class getMaal {
 			while (queryResult.next()){
 				int maal_id = queryResult.getInt("maal_id");
 				list.add(maal_id);
-				System.out.println("Rownr: " + maal_id);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -74,6 +76,20 @@ public class getMaal {
 		return rows;
 	}
 	
+	public ArrayList<Maal> getAll(){
+		try {
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM maal");
+			System.out.println("Query: "+pstmt);
+			ResultSet queryResult = pstmt.executeQuery();
+
+			return Maal.fromResultSet(queryResult);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * This method returns all maal-entries
 	 */
@@ -85,27 +101,30 @@ public class getMaal {
 				for (int i = 1; i <= amountOfColumns; i++){
 					row += rs.getString(i) + ", ";
 				}
-				System.out.println(row);
+				//System.out.println(row);
 			}
 		}catch(Exception exc){
 		exc.printStackTrace();
 		}
 	}
-	
-	public List<Object> getRow(int id){
+	/**
+	 * Returns the selected maal with all columns in a lost
+	 * @param id
+	 * @return
+	 */
+	public Maal getRow(int id){
 		try {
-			ResultSet queryResult = stmt.executeQuery("select * from maal where maal_id ='id' ");
- 
-			List<Object> row = new ArrayList<Object>();
-			while(queryResult.next()){
-				for(int i=1; i <= amountOfColumns; i++){
-					row.add(queryResult.getString(i));
-				}
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM maal WHERE maal_id=?");
+			pstmt.setInt(1, id);
+			System.out.println("Query: "+pstmt);
+			ResultSet queryResult = pstmt.executeQuery();
+
+			ArrayList<Maal> maalList = Maal.fromResultSet(queryResult);
+			if (maalList.size() == 0){
+				return null;
 			}
-			System.out.println("The row consists of: " + row);
-			return row;				
-			
-		} catch (SQLException e) {
+			return maalList.get(0);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

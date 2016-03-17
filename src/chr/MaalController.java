@@ -29,7 +29,7 @@ public class MaalController{
 	@FXML private Button submitChanges;
 	getMaal retrieve = new getMaal();
 	writeMaal writeNew = new writeMaal();
-	Maal maal = new Maal();
+	Maaladas maal = new Maaladas();
 	
 	/**
 	 * This is the constructor for retrieving a goal from the database
@@ -71,12 +71,14 @@ public class MaalController{
 	 * @param ID
 	 */
 	public void fillMaal(int ID){
-		List<Object>row = retrieve.getRow(ID);
+		Maal maal = retrieve.getRow(ID);
 		
-		goalStart.setValue((LocalDate) row.get(2));
-		goalDoneAt.setValue((LocalDate) row.get(3));
-		goalBox.setText((String) row.get(4));
-		goalEnd.setValue((LocalDate) row.get(5));
+		if (maal == null) return;
+		
+		goalStart.setValue(maal.getLocalfraDato());
+		goalDoneAt.setValue(maal.getLocaloppnaaddDato());
+		goalBox.setText(maal.maal);
+		goalEnd.setValue(maal.getLocaltilDato());
 		
 		if (goalDoneAt.getValue() != null){
 			goalAchieved.setVisible(true);
@@ -118,6 +120,10 @@ public class MaalController{
 	 * This method creates a new goal with what is inside each box after the createGoal-button is clicked.
 	 */
 	public void createGoal(){
+		Maal newGoal = new Maal();
+		
+		newGoal.fraDato = goalStart.getValue();
+		
 		writeNew.createNewGoal(goalStart.getValue(), goalDoneAt.getValue(), goalBox.getText(), goalEnd.getValue());
 	}
 

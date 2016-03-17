@@ -2,12 +2,18 @@ package controllers;
 
 
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
-import chr.Maal;
+import chr.Maaladas;
 import chr.getMaal;
+import chr.Maal;
 import chr.writeMaal;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -27,9 +33,13 @@ public class MaalController{
 	@FXML private DatePicker goalDoneAt;
 	@FXML private TextArea goalAchieved;
 	@FXML private Button submitChanges;
+	@FXML private Button goalDelete;
+	
+	
 	getMaal retrieve = new getMaal();
 	writeMaal writeNew = new writeMaal();
 	Maal maal = new Maal();
+	List<Integer> maalList;
 	
 	/**
 	 * This is the constructor for retrieving a goal from the database
@@ -43,6 +53,7 @@ public class MaalController{
 		goalEnd.setValue(null);
 		goalDoneAt.setValue(null);
 		goalAchieved.setVisible(false);
+		goalDelete.setVisible(false);
 		
 		
 		if(maal_list.getItems() != null){ 
@@ -53,7 +64,19 @@ public class MaalController{
 			String idToString = maalList.get(i).toString();
 			maal_list.getItems().add(idToString);
 		}
-		System.out.println(maal_list);
+		
+		goalDelete.textProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
+				if (goalDelete.getText().length() != 0){
+					goalDelete.setVisible(true);
+					//sluttDato.setVisible(true);
+				}
+				else{
+					goalDelete.setVisible(false);
+				}
+		}});
 	}
 	
 	/**
@@ -72,13 +95,14 @@ public class MaalController{
 	 * @param ID
 	 */
 	public void fillMaal(int ID){
-		List<Object>row = retrieve.getRow(ID);
-		System.out.println(row);
-		goalStart.setValue((LocalDate) row.get(2));
-		goalDoneAt.setValue((LocalDate) row.get(3));
-		goalBox.setText((String) row.get(4));
-		goalEnd.setValue((LocalDate) row.get(5));
+		Maal maal = retrieve.getRow(ID);
+		System.out.println(maal);
+		goalStart.setValue(maal.fraDato);
+		goalDoneAt.setValue(maal.oppnaaddDato);
+		goalBox.setText(maal.maal);
+		goalEnd.setValue(maal.tilDato);
 		
+		goalDelete.setVisible(true);
 		if (goalDoneAt.getValue() != null){
 			goalAchieved.setVisible(true);
 		}
@@ -87,19 +111,19 @@ public class MaalController{
 	
 	public void changeStart(){
 		if(goalStart.getValue() == null) {
-			goalStart.setStyle("-fx-border-color: red");
+			goalStart.setPromptText("You need to fill this");
 		}
 		else{
-			goalStart.setStyle("");
+			goalStart.setPromptText("Goal started at");
 		}
 	}
 	
 	public void changeEnd(){
 		if(goalEnd.getValue() == null) {
-			goalEnd.setStyle("-fx-border-color: red");
+			goalEnd.setPromptText("You need to fill this");
 		}
 		else{
-			goalEnd.setStyle("");
+			goalEnd.setPromptText("Goal ends at");
 		}
 	}
 	
@@ -119,14 +143,41 @@ public class MaalController{
 	 * This method creates a new goal with what is inside each box after the createGoal-button is clicked.
 	 */
 	public void createGoal(){
-		writeNew.createNewGoal(goalStart.getValue(), goalDoneAt.getValue(), goalBox.getText(), goalEnd.getValue());
+		Maal newMaal = new Maal();
+		
+		newMaal.fraDato = goalStart.getValue();
+		newMaal.tilDato = goalEnd.getValue();
+		newMaal.oppnaaddDato = goalDoneAt.getValue();
+		newMaal.maal = goalBox.getText();
+		
+		writeNew.createNewGoal(newMaal);
+	}
+	
+	public void onDelete(){
+		//System.out.println("Size of list: " + maalList.size());
+		int id = Integer.parseInt(maal_list.getValue());
+		writeNew.deleteGoal(id);
+		goalDelete.setVisible(false);
+		initialize();
+		
 	}
 
 	public void submitChange(){
 		try{
 			//Update the existing maal-object with contents of all fx:ids
 			int current = Integer.parseInt(maal_list.getValue());
-			writeNew.updateGoal(current,goalStart.getValue(), goalDoneAt.getValue(), goalBox.getText(), goalEnd.getValue());
+			
+			Maal newMaal = new Maal();
+			
+			newMaal.fraDato = goalStart.getValue();
+			newMaal.tilDato = goalEnd.getValue();
+			newMaal.oppnaaddDato = goalDoneAt.getValue();
+			newMaal.maal = goalBox.getText();
+			newMaal.id = current;
+			
+			writeNew.updateGoal(newMaal);
+			
+			//writeNew.updateGoal(current,goalStart.getValue(), goalDoneAt.getValue(), goalBox.getText(), goalEnd.getValue());
 			changeStart();
 			changeEnd();
 			changeGoal();
