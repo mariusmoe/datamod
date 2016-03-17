@@ -65,7 +65,7 @@ public class TrainingInsert {
 
     }
 
-
+    /*Uploads a row to 'trening' table. The following methods need the 'trening_id' that this insertion creates, which is stored in autoIncValue*/
     private void uploadWorkout() {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -75,14 +75,7 @@ public class TrainingInsert {
             String get = "INSERT INTO trening (tidspunkt, varighet, personlig_form, prestasjon) VALUES (?, ?, ?, ?)";
             preparedStatement = dbConnection.prepareStatement(get, Statement.RETURN_GENERATED_KEYS);
 
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()){
-                autoIncValue = rs.getInt(1);
-            }
-            else{
-                System.out.println("Couldn't find autoIncValue for training");
 
-            }
 
             preparedStatement.setTimestamp(1, workout.getDateAsTimestamp());
             preparedStatement.setInt(2, workout.getDuration());
@@ -90,8 +83,14 @@ public class TrainingInsert {
             preparedStatement.setInt(4, workout.getAchievement());
 
             preparedStatement.executeUpdate();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()){
+                autoIncValue = rs.getInt(1);
+            }
+            else{
 
-            System.out.print("Innsettingen av trening var vellykket");
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,9 +100,7 @@ public class TrainingInsert {
                     preparedStatement.close();
                 }
 
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -111,10 +108,11 @@ public class TrainingInsert {
 
         }
     }
-
+    /*Uploads a row in 'innendors' table containing the referance to the 'trening' that was just inserted */
     private void uploadIndoor() {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
+        /*if the 'trening_id' was successfully transferred from the above method..*/
         if (autoIncValue > 0){
 
             try{
@@ -128,7 +126,6 @@ public class TrainingInsert {
 
                 preparedStatement.executeUpdate();
 
-                System.out.print("Innsettingen av innendors var vellykket");
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -154,6 +151,7 @@ public class TrainingInsert {
 
     }
 
+    /*Uploads a row into the 'utendors' table containing the referance to the 'trening' that was just inserted */
     private void uploadOutdoor() {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -170,7 +168,6 @@ public class TrainingInsert {
 
                 preparedStatement.executeUpdate();
 
-                System.out.print("Innsettingen av utendørs var vellykket");
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -211,21 +208,38 @@ public class TrainingInsert {
             dbConnection = getConnection();
             ObservableList<SavedExercise> savedExercises = mainCtrl.getExercises();
             for (SavedExercise svdEx : savedExercises){
-                preparedStatement = null;
                 preparedStatement = dbConnection.prepareStatement(insertExWork);
 
                 preparedStatement.setString(1,svdEx.getName());
-                preparedStatement.setInt(2,autoIncValue);
-                preparedStatement.setInt(3,  );
+                preparedStatement.setInt(2, autoIncValue);
+                preparedStatement.setInt(3,  svdEx.getExWeight());
                 preparedStatement.setInt(4, svdEx.getExSets());
                 preparedStatement.setInt(5, svdEx.getExReps());
 
                 preparedStatement.executeUpdate();
+                preparedStatement.close();
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+
+            try{
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         {
 
         }
