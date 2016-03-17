@@ -307,7 +307,7 @@ public class MainController {
 			else{
 				work.setOutdoorFields(Integer.parseInt(tempField.getText()), weatherArea.getText());
 			}
-			TrainingInsert trainIns = new TrainingInsert(work, indoorToggle.selectedProperty().getValue());
+			TrainingInsert trainIns = new TrainingInsert(this, work, indoorToggle.selectedProperty().getValue());
 			trainIns.upload();
 		}
 
