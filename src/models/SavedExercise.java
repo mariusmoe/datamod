@@ -1,9 +1,6 @@
 package models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 /**
  * Created by Hallgeir on 15.03.2016.
@@ -25,28 +22,40 @@ public class SavedExercise {
         return exWeight;
     }
 
-    public IntegerProperty exLengthProperty() {
-        return exLength;
-    }
-
     public StringProperty exNameProperty() { return exName;}
+
+    public BooleanProperty getExStrengthTrue(){ return exStrengthTrue;}
 
 
 
     private StringProperty exName;
     private IntegerProperty exSets;
+
+    public int getExSets() {
+        return exSets.get();
+    }
+
+    public int getExReps() {
+        return exReps.get();
+    }
+
+    public int getExWeight() {
+        return exWeight.get();
+    }
+
+
     private IntegerProperty exReps;
     private IntegerProperty exWeight;
-    private IntegerProperty exLength;
+    private BooleanProperty exStrengthTrue;
 
 
-    public SavedExercise(String name, int sets, int reps, int weight, int length){
+    public SavedExercise(String name, int sets, int reps, int weight, boolean strengthTrue){
 
         exName = new SimpleStringProperty(name);
         exSets = new SimpleIntegerProperty(sets);
         exReps = new SimpleIntegerProperty(reps);
         exWeight = new SimpleIntegerProperty(weight);
-        exLength = new SimpleIntegerProperty(length);
+        exStrengthTrue = new SimpleBooleanProperty(strengthTrue);
 
 
     }
