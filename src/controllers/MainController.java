@@ -57,19 +57,20 @@ public class MainController {
 	@FXML private Label min;
 
 	@FXML void saveExercise() {
-		int exLength;
+		/**/
 		int exWeight;
 		if (strengthToggle.selectedProperty().getValue()) {
-			exLength = 0;
 			exWeight = Integer.parseInt(weight.getText());
 
-		}
-		else {
-			exWeight = 0;
-			exLength = Integer.parseInt(length.getText());
-		}
+		} else {
 
-		SavedExercise svdExercise = new SavedExercise(exerciseNameLbl.getText(), Integer.parseInt(noSets.getText()), Integer.parseInt(noReps.getText()),exWeight, exLength);
+			exWeight = Integer.parseInt(length.getText());
+		}
+		boolean isStrength = false;
+		if (strengthToggle.selectedProperty().getValue())
+			isStrength = true;
+
+		SavedExercise svdExercise = new SavedExercise(exerciseNameLbl.getText(), Integer.parseInt(noSets.getText()), Integer.parseInt(noReps.getText()),exWeight, isStrength);
 		exerciseData.add(svdExercise);
     }
 
