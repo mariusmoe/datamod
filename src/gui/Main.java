@@ -1,4 +1,4 @@
-package dagbokapplication;
+package gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
