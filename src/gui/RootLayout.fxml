@@ -21,8 +21,5 @@
     <Tab fx:id="trainingTab" text="Show workout">
         <content><fx:include source="UserGetTraining.fxml" /></content>
     </Tab>
-    <Tab fx:id="maalTab" text="Show goals">
-        <content><fx:include source="Maal.fxml" /></content>
-    </Tab>
 </tabs>
 </TabPane>

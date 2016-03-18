@@ -23,7 +23,7 @@ public class ExerciseFetch {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/dag";
     static final String USER = "root";
-    static final String PASS = null;
+    static final String PASS = "eple";
 
 
     public Collection<Exercise> getExercises() {

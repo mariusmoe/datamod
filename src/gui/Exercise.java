@@ -5,45 +5,67 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Exercise {
 
-	public Exercise(String name, String description, String alternative, String category){
-		setName(name);
-		setDescription(description);
-		setAlternative(alternative);
-		setCategory(category);
+	public Exercise(){
+
 	}
 
 
-	private Property<String> nameProperty = new SimpleStringProperty();
-	private Property<String> descriptionProperty = new SimpleStringProperty();
-	private Property<String> alternativeProperty = new SimpleStringProperty();
-	private Property<String> categoryProperty = new SimpleStringProperty();
+	public Exercise(String name, String description, String alternative, String category){
+		this.name = new SimpleStringProperty(name);
+		this.description = new SimpleStringProperty(description);
+		this.alternative = new SimpleStringProperty(alternative);
+		this.category = new SimpleStringProperty(category);
+
+	}
+
+
+	private Property<String> name;
+	private Property<String> description;
+	private Property<String> alternative;
+	private Property<String> category;
 
 
 	void setDescription(String descr){
-		descriptionProperty.setValue(descr);
+		description.setValue(descr);
 	}
-	String getDescription(){
-		return descriptionProperty.getValue();
+	public String getDescription(){
+		return description.getValue();
 	}
 	void setName(String name){
-		nameProperty.setValue(name);
+		this.name.setValue(name);
 	}
-	String getName(){
-		return nameProperty.getValue();
+	public String getName(){
+		return name.getValue();
 	}
 	void setAlternative(String alternative){
-		alternativeProperty.setValue(alternative);
+		this.alternative.setValue(alternative);
 	}
-	String getAlternative(){
-		return alternativeProperty.getValue();
+	public String getAlternative(){
+		return alternative.getValue();
 	}
 	void setCategory(String category) {
-		categoryProperty.setValue(category);
+		this.category.setValue(category);
 	}
-	String getCategory(){
-		return categoryProperty.getValue();
+	public String getCategory(){
+		return category.getValue();
 	}
 
+
+	public Property<String> nameProperty() {
+		return name;
+	}
+
+	public Property<String> descriptionProperty() {
+		return description;
+	}
+
+	public Property<String> alternativeProperty() {
+		return alternative;
+	}
+
+	public Property<String> categoryProperty() {
+		return category;
+	}
 
 
 }
