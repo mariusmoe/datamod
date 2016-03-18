@@ -1,4 +1,4 @@
-package models;
+package gui;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;

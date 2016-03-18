@@ -4,10 +4,10 @@ package db;
  * Created by Hallgeir on 16.03.2016.
  */
 
-import controllers.MainController;
+import gui.MainController;
 import javafx.collections.ObservableList;
-import models.SavedExercise;
-import models.Workout;
+import gui.SavedExercise;
+import gui.Workout;
 
 import java.sql.*;
 
@@ -29,7 +29,7 @@ public class TrainingInsert {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/dag";
     static final String USER = "root";
-    static final String PASS = null;
+    static final String PASS = "eple";
 
     public void setConnection(){
 

@@ -1,4 +1,4 @@
-package models;
+package gui;
 
 import javafx.beans.property.*;
 
