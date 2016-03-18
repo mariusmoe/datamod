@@ -22,7 +22,7 @@ public class TrainingInsert {
         this.autoIncValue = -1;
     }
     private static Connection connect = null;
-    private static Statement statement = null;
+    //private static Statement statement = null;
 
     private int autoIncValue;
 

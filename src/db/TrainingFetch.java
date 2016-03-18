@@ -37,7 +37,7 @@ public class TrainingFetch {
 	 * @throws Exception Exceptions if connection fails
 	 */
 	public void readDataBase(String name) throws Exception {
-		System.out.println("trid to connect...");
+		System.out.println("tried to connect...");
 		try {
 			//mysql.stud.ntnu.no
 			// connect = DriverManager.getConnection("jdbc:mysql://localhost/dag?" + "user=mariuom_koie&password=eple");

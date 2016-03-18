@@ -71,7 +71,7 @@ public class MainController {
 		exerciseData.add(svdExercise);
     }
 
-	@FXML private TableView savedExerciseTable;
+	@FXML private TableView<SavedExercise> savedExerciseTable;
 	@FXML private TableColumn<SavedExercise, String> nameCol;
 	@FXML private TableColumn<SavedExercise, Integer> setCol;
 	@FXML private TableColumn<SavedExercise, Integer> repCol;
