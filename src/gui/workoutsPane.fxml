@@ -8,38 +8,54 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.WorkoutsPaneController">
-   <left>
-            <VBox prefHeight="585.0" prefWidth="311.0" BorderPane.alignment="CENTER">
-               <children>
-            <Label text="Øvelser">
-               <font>
-                  <Font size="27.0" />
-               </font>
-            </Label>
-                  <ListView fx:id="exerciseList" prefHeight="590.0" prefWidth="311.0" />
-               </children>
-            </VBox>
-   </left>
-   <center>
-      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   <top>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="685.0" BorderPane.alignment="CENTER">
          <children>
-                  <VBox prefHeight="577.0" prefWidth="352.0" spacing="15.0">
-                     <children>
-                        <Label text="Navn">
-                           <font>
-                              <Font size="27.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="exerciseName" editable="false" prefHeight="90.0" prefWidth="275.0" promptText="Beskrivelse.." />
-                        <Label text="Kan erstattes med">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <ListView fx:id="altExerciseList" prefHeight="99.0" prefWidth="299.0" />
-                     </children>
-                  </VBox>
+            <Label prefHeight="21.0" prefWidth="300.0" text="Sett inn en ny øvelse" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+            </Label>
          </children>
-      </FlowPane>
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="344.0" prefWidth="300.0" spacing="10.0" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <HBox prefHeight="25.0" prefWidth="606.0">
+               <children>
+                  <TextField fx:id="name" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="160.0" promptText="Navn.." />
+                  <ComboBox fx:id="category" prefHeight="30.0" prefWidth="120.0" promptText="Kategori">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="19.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <TextArea fx:id="description" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" promptText="Beskrivelse.." wrapText="true">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TextArea>
+            <TextField fx:id="replacement" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" promptText="Hvilken ene øvelse kan erstatte denne?" />
+            <Button fx:id="register" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Registrer øvelse" textAlignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
    </center>
             </BorderPane>
