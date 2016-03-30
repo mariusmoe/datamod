@@ -51,7 +51,7 @@
             </TextArea>
             <Label text="Hvilken ene øvelse kan erstatte denne?" />
             <TextField fx:id="replacement" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" promptText="MÅ FYLLES" />
-            <Button fx:id="register" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Registrer øvelse" textAlignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#registerExercise" prefHeight="30.0" prefWidth="150.0" text="Registrer øvelse" textAlignment="CENTER">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
