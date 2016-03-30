@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import gui.WorkoutsPaneJava;
+import controllers.WorkoutsPaneJava ;
 
 public class ExerciseInsert{
     private static Connection connect = null;
