@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.WorkoutsPaneJava">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WorkoutsPaneJava">
    <top>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="685.0" BorderPane.alignment="CENTER">
          <children>
@@ -49,7 +49,8 @@
                   <Insets />
                </VBox.margin>
             </TextArea>
-            <TextField fx:id="replacement" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" promptText="Hvilken ene øvelse kan erstatte denne?" />
+            <Label text="Hvilken ene øvelse kan erstatte denne?" />
+            <TextField fx:id="replacement" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="300.0" promptText="MÅ FYLLES" />
             <Button fx:id="register" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Registrer øvelse" textAlignment="CENTER">
                <VBox.margin>
                   <Insets />

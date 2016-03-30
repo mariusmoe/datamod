@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * Created by William on 14.03.2016.
  */
-public class CategoryFetch{
+public class categoryFetch{
 
     private ArrayList<String> categories = new ArrayList<String>();
 
