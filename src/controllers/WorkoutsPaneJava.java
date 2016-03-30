@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import db.ExerciseInsert;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -22,15 +23,16 @@ public class WorkoutsPaneJava{
 
 	@FXML
 	private TextField replacement;
+	private ExerciseInsert exInsert;
 
-	@FXML
-	private Button register;
+
 
 	private ArrayList<String> categories;
 	private categoryFetch categoryfetch;
 
 	@FXML private void initialize(){
 		categoryfetch = new categoryFetch();
+		exInsert = new ExerciseInsert(this);
 
 		setCategory();
 	}
@@ -58,6 +60,11 @@ public class WorkoutsPaneJava{
 		for(int i=0;i<categories.size();i++){
 			category.getItems().add(categories.get(i));
 		}
+	}
+
+	@FXML private void registerExercise(){
+
+		exInsert.uploadExercise();
 	}
 }
 
