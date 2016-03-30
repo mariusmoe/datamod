@@ -18,9 +18,10 @@ public class ExerciseInsert{
     static final String DB_URL = "jdbc:mysql://localhost:3306/dag";
     static final String USER = "root";
     static final String PASS = "eple";
-    
+
     public ExerciseInsert(WorkoutsPaneJava mainCtrl){
         this.ex = mainCtrl;
+        setConnection();
     }
 
     public void setConnection(){
@@ -41,15 +42,15 @@ public class ExerciseInsert{
     public Connection getConnection(){
         return connect;
     }
-    
-    private void uploadExercise() {
+
+    public void uploadExercise() {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
 
         try{
             dbConnection = getConnection();
             String get = "INSERT INTO ovelse (navn, beskrivelse, ovelse_navn, kategori_knavn) VALUES (?, ?, ?, ?)";
-            preparedStatement = dbConnection.prepareStatement(get, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement = dbConnection.prepareStatement(get);
 
 
 
@@ -59,7 +60,6 @@ public class ExerciseInsert{
             preparedStatement.setString(4, ex.getCategory());
 
             preparedStatement.executeUpdate();
-            ResultSet rs = preparedStatement.getGeneratedKeys();
 
         } catch (SQLException e) {
             e.printStackTrace();
