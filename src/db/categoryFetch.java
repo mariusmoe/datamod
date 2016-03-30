@@ -1,23 +1,15 @@
 package db;
 
-
-import gui.Exercise;
-
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by Hallgeir on 14.03.2016.
+ * Created by William on 14.03.2016.
  */
-public class ExerciseFetch {
+public class categoryFetch{
 
-    public ExerciseFetch(){
-
-    }
-
-    private Collection<Exercise> exercises = new ArrayList<Exercise>();
+    private ArrayList<String> categories = new ArrayList<String>();
 
     private static Connection connect = null;
     private static Statement statement = null;
@@ -27,44 +19,20 @@ public class ExerciseFetch {
     static final String USER = "root";
     static final String PASS = "eple";
 
-
-    public Collection<Exercise> getExercises() {
-        return exercises;
-    }
-
-    private void addExercise(Exercise ex){
-        exercises.add(ex);
-    }
-
-
-    public void readExercises(String name){
-
-
+    public ArrayList<String> getCategories(){
         try {
             Class.forName(JDBC_DRIVER);
             System.out.println("Connecting to a selected database...");
             connect = DriverManager.getConnection(DB_URL, USER, "eple");
             System.out.println("Connected database successfully...");
             PreparedStatement prstmnt = null;
-            String get = "SELECT * from dag.ovelse";
+            String get = "SELECT knavn from dag.kategori";
             prstmnt = connect.prepareStatement(get);
             ResultSet set = prstmnt.executeQuery();
             while (set.next()){
-                String exerciseName = set.getString("navn");
-                String description = set.getString("beskrivelse");
-                String alternative = set.getString("ovelse_navn");
-                String category = set.getString("kategori_knavn");
-                addExercise(new Exercise(exerciseName, description, alternative, category));
-
-
+                categories.add(set.getString("knavn"));
             }
             set.close();
-
-
-
-
-
-
         } catch (SQLException se) {
             se.printStackTrace();
         } catch (Exception e) {
@@ -77,7 +45,7 @@ public class ExerciseFetch {
                 se.printStackTrace();
             }
         }
-
-
+        
+        return categories;
     }
 }

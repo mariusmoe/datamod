@@ -4,10 +4,12 @@ package db;
  * Created by Hallgeir on 16.03.2016.
  */
 
-import controllers.MainController;
+
+import gui.MainController;
 import javafx.collections.ObservableList;
-import models.SavedExercise;
-import models.Workout;
+import gui.SavedExercise;
+import gui.Workout;
+
 
 import java.sql.*;
 
@@ -72,7 +74,9 @@ public class TrainingInsert {
 
         try{
             dbConnection = getConnection();
-            String get = "INSERT INTO trening (tidspunkt, varighet, personlig_form, prestasjon) VALUES (?, ?, ?, ?)";
+
+            String get = "INSERT INTO trening (tidspunkt, varighet, personlig_form, prestasjon, maal_maal_id) VALUES (?, ?, ?, ?, ?)";
+
             preparedStatement = dbConnection.prepareStatement(get, Statement.RETURN_GENERATED_KEYS);
 
 
@@ -81,6 +85,8 @@ public class TrainingInsert {
             preparedStatement.setInt(2, workout.getDuration());
             preparedStatement.setInt(3, workout.getForm());
             preparedStatement.setInt(4, workout.getAchievement());
+
+            preparedStatement.setInt(5, 8);
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();

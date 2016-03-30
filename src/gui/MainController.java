@@ -1,4 +1,4 @@
-package controllers;
+package gui;
 
 import db.ExerciseFetch;
 import db.TrainingInsert;
@@ -10,9 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import models.Exercise;
-import models.SavedExercise;
-import models.Workout;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -74,7 +71,7 @@ public class MainController {
 		exerciseData.add(svdExercise);
     }
 
-	@FXML private TableView savedExerciseTable;
+	@FXML private TableView<SavedExercise> savedExerciseTable;
 	@FXML private TableColumn<SavedExercise, String> nameCol;
 	@FXML private TableColumn<SavedExercise, Integer> setCol;
 	@FXML private TableColumn<SavedExercise, Integer> repCol;
