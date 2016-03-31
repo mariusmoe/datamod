@@ -39,7 +39,7 @@ public class ExerciseForTrainingFetch {
 	 * @throws Exception Exceptions if connection fails
 	 */
 	public void readDataBase(String idtrening) throws Exception {
-		System.out.println("trid to connect...");
+		//System.out.println("trid to connect...");
 		try {
 			//mysql.stud.ntnu.no
 			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/dag","root","eple");

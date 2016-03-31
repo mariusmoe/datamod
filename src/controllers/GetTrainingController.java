@@ -74,6 +74,9 @@ public class GetTrainingController {
     @FXML
     private TableColumn howColumn;
     
+    @FXML
+    private Button load;
+    
     public static List<TrainingRow> list;
     TrainingFetch tf = new TrainingFetch();
     
@@ -83,6 +86,17 @@ public class GetTrainingController {
 	@SuppressWarnings("unchecked")
 	@FXML
 	public void initialize(){		
+		
+		
+		load.setOnAction((actionEvent) -> {
+			//action here 
+			initialize();
+		});
+		
+		addData();
+	}
+	
+	public void addData(){
 		try {
 			//Read the db for training(@param does not mean anything)
 			tf.readDataBase("4");
